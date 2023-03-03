@@ -81,3 +81,30 @@ function updateFilterBtn(filterBtn) {
   }
   filterBtn.classList.add("SelectedFilter");
 }
+
+// AFFICHAGE QUAND CONNECTÉ
+function showWhenConnected() {
+  const filters = document.getElementsByClassName("filters");
+  filters[0].classList.add("hidden");
+  const modifyLink1 = document.getElementsByClassName("modifyLink1");
+  modifyLink1[0].style.display = "flex";
+  const modifyLink2 = document.getElementsByClassName("modifyLink2");
+  modifyLink2[0].style.display = "flex";
+  /*const modifyLinks = document.getElementsByClassName("modifyLink");
+  for (let modifyLink of modifyLinks) {
+    modifyLink.style.display = "flex";
+  }*/
+  const headBand = document.getElementsByClassName("divheadband");
+  headBand[0].style.display = "flex";
+}
+
+const listeLi = document.querySelector("ul");
+const loginLi = listeLi.querySelectorAll("li")[2];
+
+if (sessionStorage.getItem("access_token") != null) {
+  loginLi.innerText = "logout";
+  loginLi.addEventListener("click", function () {
+    sessionStorage.clear();
+    document.location.reload();
+  })
+}

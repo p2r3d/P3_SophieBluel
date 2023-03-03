@@ -20,20 +20,36 @@
 
 <body>
 	<header>
-		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-		<nav>
-			<ul>
-				<li>projets</li>
-				<li>contact</li>
-				<li><a href="./html/login.html">login</a></li>
-				<li><img src="./assets/icons/instagram.png" alt="Instagram" id="insta"></li>
-			</ul>
-		</nav>
+		<div class="divHeader">
+			<div class="divheadband" style="display:none">
+				<a href="#" class="headbandText">
+					<i class="fa-regular fa-pen-to-square"></i>
+					<p>Mode édition<p>
+				</a>
+				<input type="button" name="" class="publishBtn" value="publier les changements">
+			</div>
+			<div class="divLogoNav">
+				<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+				<nav>
+					<ul>
+						<li>projets</li>
+						<li>contact</li>
+						<li><a href="./html/connexion.html">login</a></li>
+						<li><img src="./assets/icons/instagram.png" alt="Instagram" id="insta"></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
 	</header>
+	
 	<main>
 		<section id="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
+				<div id="divModifyLink">
+					<a href="" class="modifyLink1" style="display:none">
+						<i class="fa-regular fa-pen-to-square"></i>modifier</a>
+				</div>
 			</figure>
 			<article>
 				<h2>Designer d'espace</h2>
@@ -46,7 +62,11 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
+			<div class="divProjectTitle">
+				<h2>Mes Projets</h2>
+				<a href="#modal1" class="modifyLink2" style="display:none">
+					<i class="fa-regular fa-pen-to-square"></i>modifier</a>
+			</div>
 			<div class="gallery">
 			</div>
 		</section>
