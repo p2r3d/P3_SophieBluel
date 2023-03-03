@@ -47,6 +47,9 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+* {
+	box-sizing: border-box;
+}
 body {
 	max-width: 1140px;
 	margin:auto;
@@ -93,41 +96,58 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	font-weight:400;
 }
 
 li:hover {
 	color: #B1663C;
 }
+#insta {
+	width: 20px;
+	height: 20px;
+}
 #introduction {
 	display: flex;
 	align-items: center;
+	margin : 0 95px;
 }
 #introduction figure {
-	flex: 1
+	flex: 1;
 }
 #introduction img {
 	display: block;
 	margin: auto;
-	width: 80%;
+	width: 100%;
 }
 
 #introduction article {
-	flex: 1
+	flex: 1;
 }
 #introduction h2 {
 	margin-bottom: 1em;
+		margin-left: 4rem;
 }
 
 #introduction p {
 	margin-bottom: 0.5em;
+	margin-left: 4rem;
+	color: #3D3D3D;
+	font-family: 'Work Sans';
+	font-weight: 400;
+}
+#portfolio {
+	margin: 0px 95px;
+
 }
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
 }
+/* GALERIE */
 .gallery {
 	width: 100%;
 	display: grid;
+	
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
@@ -135,7 +155,15 @@ li:hover {
 
 .gallery img {
 	width: 100%;
+}
+.cardfigcaption {
+	color: #3D3D3D;
+	font-size: 13px;
+	font-weight: 400;
+}
 
+.card img {
+	width: 100%;
 }
 #contact {
 	width: 50%;
