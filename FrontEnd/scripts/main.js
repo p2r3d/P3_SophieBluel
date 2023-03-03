@@ -32,8 +32,13 @@ fetchWorks().then(worksFetched => {
   }
   fetchCategories().then(categoriesFetched => {
     // AFFICHAGE DU PORTFOLIO
-    displayFilters(worksFetched,categoriesFetched);
+    displayFilters(worksFetched, categoriesFetched);
+
+    // utilisateur connecté
+    if (sessionStorage.getItem("access_token")) {
+      // liens "modifier" et filtres cachés,  bandeau noir affiché
+      showWhenConnected();
+    }
   })
-
-
 })
+
