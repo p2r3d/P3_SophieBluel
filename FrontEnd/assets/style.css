@@ -165,6 +165,48 @@ li:hover {
 .card img {
 	width: 100%;
 }
+
+/* FILTRES */
+.filters {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: center;
+	margin-bottom: 51px;
+	gap: 10px;
+}
+
+.btn {
+	border-radius: 60px;
+	background-color: #FFFFFF;
+	border: 1px solid #1D6154;
+	color: #1D6154;
+	height: 37px;
+	padding: 0px 20px;
+	font-family: 'Syne';
+	font-size: 16px;
+}
+
+.btn:hover {
+	background-color: #1D6154;
+	color: #FFFFFF;
+}
+
+.gallery {
+	width: 100%;
+	display: grid;
+	margin: 50px auto;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+}
+
+.SelectedFilter {
+	background-color: #1D6154;
+	color: #FFFFFF;
+}
+
+
 #contact {
 	width: 50%;
 margin: auto;
