@@ -63,7 +63,7 @@ a {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	/*margin: 50px 0*/
 }
 .divHeader {
 	width: 100%;
