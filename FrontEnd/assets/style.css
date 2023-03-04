@@ -60,6 +60,9 @@ a {
 	text-decoration: none;
 	color: inherit;
 }
+*:focus {
+	box-shadow: 0 0 10px blue;
+}
 header {
 	display: flex;
 	justify-content: space-between;
@@ -184,14 +187,14 @@ li:hover {
 	width: 100%;
 }
 
-.modifyLink1 {
+/*.modifyLink1 {
 	gap: 5px;
 	margin: 10px 0;
 }
 .modifyLink2 {
 	gap: 5px;
 	/*margin: 10px 0;*/
-}
+/*}*/
 .divProjectTitle {
 	display: flex;
 	flex-direction: row;
@@ -429,4 +432,47 @@ footer nav ul li {
 	color: #B1663C;
 	font-size: 22px;
 	font-weight: 600;
+}
+/* --------------partie Modale-------------- */
+.js-modal {
+	gap: 5px;
+	margin: 10px 0;
+}
+.modal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.divModal {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: #FFFFFF;
+	width: 630px;
+	border-radius: 10px;
+	max-width: calc(150vw - 20px);
+	max-height: calc(100vh - 20px);
+	padding: 0 100px;
+
+}
+.divModal p {
+	font-size: 26px;
+	text-align: center;
+	padding: 0 0 46px 0;
+}
+
+.workCard {
+	position: relative;
+}
+
+#idTitleModal {
+	text-align: center;
+	font-size: 26px;
 }

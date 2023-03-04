@@ -13,6 +13,7 @@
 	<script src="https://kit.fontawesome.com/b4aa609cc9.js" crossorigin="anonymous"></script>
 	<script src="./scripts/main.js" defer></script>
 	<script src="./scripts/dom.js" defer></script>
+	<script src="./scripts/modal.js" defer></script>
 
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
@@ -41,13 +42,13 @@
 			</div>
 		</div>
 	</header>
-	
+
 	<main>
 		<section id="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
 				<div id="divModifyLink">
-					<a href="" class="modifyLink1" style="display:none">
+					<a href="#modal1" class="js-modal" style="display:none">
 						<i class="fa-regular fa-pen-to-square"></i>modifier</a>
 				</div>
 			</figure>
@@ -64,7 +65,7 @@
 		<section id="portfolio">
 			<div class="divProjectTitle">
 				<h2>Mes Projets</h2>
-				<a href="#modal1" class="modifyLink2" style="display:none">
+				<a href="#modal1" class="js-modal" style="display:none">
 					<i class="fa-regular fa-pen-to-square"></i>modifier</a>
 			</div>
 			<div class="gallery">
@@ -83,6 +84,50 @@
 				<input type="submit" value="Envoyer" id="contact-submit">
 			</form>
 		</section>
+
+
+		<aside class="modal" id="modal1" style="display:none" role="dialog" aria-hidden="true">
+			<div class="divModal js-modal-stop">
+				<div id="divIcones">
+					<i class="fa-solid fa-arrow-left" id="idBack"></i>
+					<i class="fa-solid fa-xmark js-modal-close" id="idClose"></i>
+				</div>
+				<p id="modalTitle">Galerie photo</p>
+				<div class="idPhotosGallery">
+				</div>
+
+<!--
+				<form id="addPhotoForm" action="" method="post" style="display:none">
+					<div id="divBlue">
+						<div id="divImportPhoto">
+							<i class="fa-regular fa-image"></i>
+							<label for="workAddPhotoInput" id="addPhotoBtn">+ Ajouter photo
+								<input type="file" id="workAddPhotoInput" placeholder="Ajouter photo" name="workAddPhotoInput"
+									accept="image/png, image/jpeg, image/jpg" required>
+							</label>
+							<p>jpg, png : 4mo max</p>
+						</div>
+						<div id="thumbnail">
+							<img id="miniPhoto" src="" style="display:none">
+						</div>
+					</div>
+					<div id="divFormAddPhoto">
+						<label for="title">Titre</label>
+						<input type="text" name="title" id="idTitleAddPhoto">
+						<label for="photoCategories">Catégorie</label>
+						<select id="photoCategories" required></select>
+						<hr id="line2">
+						<input type="submit" id="addPhotoSubmitBtn" value="Valider">
+					</div>
+				</form>
+-->
+
+				<hr id="line1">
+				<input type="button" class="btn SelectedFilter" id="idAddPhotoBtn" value="Ajouter une photo">
+				<p id="idDeleteGallery">Supprimer la galerie</p>
+
+			</div>
+		</aside>
 	</main>
 
 	<footer>

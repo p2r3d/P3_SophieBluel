@@ -38,7 +38,11 @@ fetchWorks().then(worksFetched => {
     if (sessionStorage.getItem("access_token")) {
       // liens "modifier" et filtres cachés,  bandeau noir affiché
       showWhenConnected();
+      
+      
     }
+
   })
+  
 })
 

@@ -86,10 +86,13 @@ function updateFilterBtn(filterBtn) {
 function showWhenConnected() {
   const filters = document.getElementsByClassName("filters");
   filters[0].classList.add("hidden");
-  const modifyLink1 = document.getElementsByClassName("modifyLink1");
+  document.querySelectorAll(".js-modal").forEach(a => {
+    a.style.display="flex";
+  })
+  /*const modifyLink1 = document.getElementsByClassName("modifyLink1");
   modifyLink1[0].style.display = "flex";
   const modifyLink2 = document.getElementsByClassName("modifyLink2");
-  modifyLink2[0].style.display = "flex";
+  modifyLink2[0].style.display = "flex";*/
   /*const modifyLinks = document.getElementsByClassName("modifyLink");
   for (let modifyLink of modifyLinks) {
     modifyLink.style.display = "flex";
@@ -97,6 +100,7 @@ function showWhenConnected() {
   const headBand = document.getElementsByClassName("divheadband");
   headBand[0].style.display = "flex";
 }
+
 
 const listeLi = document.querySelector("ul");
 const loginLi = listeLi.querySelectorAll("li")[2];
