@@ -22,7 +22,6 @@
     modal.querySelector(".js-modal-close").addEventListener("click", closeModal);
     document.querySelectorAll(".js-modal").forEach(a => {
       a.style.display = null;
-      //alert('dans create modal remove');
       a.removeEventListener("click", openModal);
       a.addEventListener("click", openModal);
     })
@@ -34,14 +33,10 @@
     //on remet le focus sur l'élément préalablement sélectionné
     //if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
     e.preventDefault();
-   alert('closemodal');
     document.querySelectorAll(".js-modal").forEach(a => {
-      //alert('remove dans closemodal');
       a.removeEventListener("click", openModal);
       a.addEventListener("click", openModal);
     })
-    //modal.querySelector('#addPhotoForm').reset(); // Réinitialisation du formulaire
-    //modal.querySelector('#addPhotoSubmitBtn').off('submit');
     modal.style.display = "none";
     modal.setAttribute("aria-hidden", "true");
     modal.removeAttribute("aria-modal");
@@ -50,21 +45,6 @@
     modal.querySelector(".js-modal-close").removeEventListener("click", closeModal);
     modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation);
 
-    // réinitialisation du formulaire d'ajout de projets
-    /*modal.querySelector("#addPhotoForm").reset();
-    //modal.querySelector("#addPhotoForm").removeEventListener("click",window.addPhoto);
-    modal.querySelector("#addPhotoForm").reset();
-    modal.querySelector("#thumbnail").style.display = "none";
-    modal.querySelector("#divImportPhoto").style.display = "";
-    // modal.querySelector("#addPhotoForm").removeEventListener("click", window.returnBack);
-    //modal.querySelector("#addPhotoForm").removeEventListener("click", openModal);
-    //document.querySelector("#workAddPhotoInput").removeEventListener("change", window.displayThumbnail);
-    const links = document.getElementsByClassName("modifyLink");
-    for (let link of links) {
-      console.log('dans closeModal, link added');
-
-      link.addEventListener("click", openModal);
-    }*/
     modal.querySelector("#idClose").addEventListener("click", closeModal);
     modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation);
     modal = null;

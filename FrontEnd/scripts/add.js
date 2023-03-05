@@ -1,11 +1,6 @@
 async function addWork(works, cat) {
-
-  const loadPhotoBtn = document.getElementById("workAddPhotoInput");
-  //loadPhotoBtn.removeEventListener("change", window.loadPhotoFile);
-
   const token = sessionStorage.getItem("access_token");
   if (sessionStorage.getItem("access_token") != null) {
-
     // Création de l'objet formData
     let formData = new FormData();
     const inputPhotoBtn = document.querySelector("#workAddPhotoInput");
@@ -14,7 +9,6 @@ async function addWork(works, cat) {
     const opt = document.querySelector("#photoCategories");
     const optId = parseInt(opt.selectedOptions[0].id);
     formData.append("category", parseInt(optId));
-    //formData.append("category", 3);
 
     // envoi d'une demande au serveur
     fetch(`http://localhost:5678/api/works`, {
@@ -32,31 +26,23 @@ async function addWork(works, cat) {
         return data;
       })
       .then(data => {
-        console.log('ok add!');
         document.querySelector("#addPhotoForm").reset();
-        //document.querySelector("addPhotoSubmitBtn").off();
+        // ajout de l'identifiant de la catégorie dans le nouveau projet
         data.category = {};
-
         data.category = (cat[parseInt(data.categoryId) - 1]);
         data.categoryId = parseInt(data.categoryId);
-
         works.push(data);
-        console.log(works);
+        // Affichage de la galerie
         displayGallery(works);
-       // fillModal(works, cat);
-        updateWorks(works) ;
+        //Affichage dans la mini-galerie
+        updateWorks(works);
 
         // retour vers modale  mini-galerie
-
-
         const idBack = document.querySelector("#idBack");
         idBack.click();
-        //const close = document.querySelector("#idClose");
-        //close.click();
       })
       .catch((error) => {
         console.error(error.message);
       })
-    //    }
   }
 }

@@ -1,5 +1,4 @@
 // lOGIN
-
 // récup des données du formulaire de connexion
 const form = document.querySelector("form");
 form.addEventListener("submit", async function (event) {
