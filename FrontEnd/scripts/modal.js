@@ -2,33 +2,46 @@
 
 //function createModal() {
   let modal = null;
-  const focusableSelector= "button, a, input, textarea";
-  let focusablesElements=[];
-  let previouslyFocusedElement = null;
+  //const focusableSelector = "button, a, input, textarea";
+  //let focusablesElements = [];
+  //let previouslyFocusedElement = null;
 
   const openModal = function (e) {
     e.preventDefault();
+    //alert('createmodal');
     modal = document.querySelector(e.target.getAttribute("href"));
-    focusablesElements =Array.from(modal.querySelectorAll(focusableSelector));
+   // focusablesElements = Array.from(modal.querySelectorAll(focusableSelector));
     // on récupère le focus sur l'élément préalablement sélectionné avant l'affichage de la modale
-    previouslyFocusedElement = document.querySelector(":focus");
+    //previouslyFocusedElement = document.querySelector(":focus");
     modal.style.display = null;
-    focusablesElements[0].focus();
+    //focusablesElements[0].focus();
     modal.removeAttribute("aria-hidden");
     modal.setAttribute("aria-modal", "true");
     modal.addEventListener("click", closeModal);
     modal.querySelector("#idClose").addEventListener("click", closeModal);
     modal.querySelector(".js-modal-close").addEventListener("click", closeModal);
-    //const link = document.getElementsByClassName("modifyLink2");
-    //link[0].removeEventListener("click", openModal);
-    modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation);    
+    document.querySelectorAll(".js-modal").forEach(a => {
+      a.style.display = null;
+      //alert('dans create modal remove');
+      a.removeEventListener("click", openModal);
+      a.addEventListener("click", openModal);
+    })
+    modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation);
   }
 
   const closeModal = function (e) {
     if (modal === null) return;
     //on remet le focus sur l'élément préalablement sélectionné
-    if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
+    //if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
     e.preventDefault();
+   alert('closemodal');
+    document.querySelectorAll(".js-modal").forEach(a => {
+      //alert('remove dans closemodal');
+      a.removeEventListener("click", openModal);
+      a.addEventListener("click", openModal);
+    })
+    //modal.querySelector('#addPhotoForm').reset(); // Réinitialisation du formulaire
+    //modal.querySelector('#addPhotoSubmitBtn').off('submit');
     modal.style.display = "none";
     modal.setAttribute("aria-hidden", "true");
     modal.removeAttribute("aria-modal");
@@ -36,7 +49,7 @@
     modal.querySelector("#idClose").removeEventListener("click", closeModal);
     modal.querySelector(".js-modal-close").removeEventListener("click", closeModal);
     modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation);
-   
+
     // réinitialisation du formulaire d'ajout de projets
     /*modal.querySelector("#addPhotoForm").reset();
     //modal.querySelector("#addPhotoForm").removeEventListener("click",window.addPhoto);
@@ -57,44 +70,45 @@
     modal = null;
   }
 
-const focusInModal = function (e) {
-  e.preventDefault();
-  console.log(focusablesElements);
-  // renvoi de l'élément qui a le focus
-  let index = focusablesElements.findIndex(f=> f=== modal.querySelector(":focus"));
-  //debugger;
-  // si appui sur shift tab, le focus est sur l'élément précédent
-  if (e.shiftkey === true) {
-    index--;
-  } else {
-    index++;
-  }
-  if (index >= focusablesElements.length) {
-    index=0
-  }
-  if (index <0) {
-    index = focusablesElements.length - 1;
-  }
-  focusablesElements[index].focus();
-}
+ /* const focusInModal = function (e) {
+    e.preventDefault();
+    //console.log(focusablesElements);
+    // renvoi de l'élément qui a le focus
+    let index = focusablesElements.findIndex(f => f === modal.querySelector(":focus"));
+    //debugger;
+    // si appui sur shift tab, le focus est sur l'élément précédent
+    if (e.shiftkey === true) {
+      index--;
+    } else {
+      index++;
+    }
+    if (index >= focusablesElements.length) {
+      index = 0
+    }
+    if (index < 0) {
+      index = focusablesElements.length - 1;
+    }
+    focusablesElements[index].focus();
+  }*/
 
- // empêche la propagation de l'événement vers les parents
-const stopPropagation = function (e) {
-    e.stopPropagation(); 
+  // empêche la propagation de l'événement vers les parents
+  const stopPropagation = function (e) {
+    e.stopPropagation();
   }
 
-// liens vers l'ouverture de la modale 
-  document.querySelectorAll(".js-modal").forEach(a=> {
-  a.addEventListener("click", openModal);
-})
+  // Fermeture modale après appui sur Esc
+  window.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" || e.key === "Esc") {
+      closeModal(e);
+    }
+    /*if (e.key === "Tab" || modal !== null) {
+      focusInModal(e);
+    }*/
+  })
 
-// Fermeture modale après appui sur Esc
-window.addEventListener("keydown", function(e) {
-  if(e.key === "Escape" || e.key === "Esc") {
-    closeModal(e);
-  }
-  if (e.key === "Tab" || modal !== null) {
-    focusInModal(e);
-  }
-})
+  /*document.querySelectorAll(".js-modal").forEach(a => {
+    a.style.display = null;
+    alert('lien vers open modale');
+    a.addEventListener("click", openModal);
+  })*/
 

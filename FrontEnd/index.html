@@ -14,6 +14,9 @@
 	<script src="./scripts/main.js" defer></script>
 	<script src="./scripts/dom.js" defer></script>
 	<script src="./scripts/modal.js" defer></script>
+	<script src="./scripts/add.js" defer></script>
+	<script src="./scripts/delete.js" defer></script>
+
 
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
@@ -88,6 +91,7 @@
 
 		<aside class="modal" id="modal1" style="display:none" role="dialog" aria-hidden="true">
 			<div class="divModal js-modal-stop">
+				<!-- galerie de photos dans la modale-->
 				<div id="divIcones">
 					<i class="fa-solid fa-arrow-left" id="idBack"></i>
 					<i class="fa-solid fa-xmark js-modal-close" id="idClose"></i>
@@ -95,8 +99,11 @@
 				<p id="modalTitle">Galerie photo</p>
 				<div class="idPhotosGallery">
 				</div>
-
-<!--
+				<hr id="line1">
+				<input type="button" class="btn SelectedFilter" id="idAddPhotoBtn" value="Ajouter une photo">
+				<p id="idDeleteGallery">Supprimer la galerie</p>
+				
+				<!-- formulaire d'ajout de photo dans la modale-->
 				<form id="addPhotoForm" action="" method="post" style="display:none">
 					<div id="divBlue">
 						<div id="divImportPhoto">
@@ -120,12 +127,6 @@
 						<input type="submit" id="addPhotoSubmitBtn" value="Valider">
 					</div>
 				</form>
--->
-
-				<hr id="line1">
-				<input type="button" class="btn SelectedFilter" id="idAddPhotoBtn" value="Ajouter une photo">
-				<p id="idDeleteGallery">Supprimer la galerie</p>
-
 			</div>
 		</aside>
 	</main>

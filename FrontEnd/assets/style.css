@@ -60,9 +60,9 @@ a {
 	text-decoration: none;
 	color: inherit;
 }
-*:focus {
+/**:focus {
 	box-shadow: 0 0 10px blue;
-}
+}*/
 header {
 	display: flex;
 	justify-content: space-between;
@@ -475,4 +475,250 @@ footer nav ul li {
 #idTitleModal {
 	text-align: center;
 	font-size: 26px;
+}
+#line1 {
+	border: 1px solid #B3B3B3;
+	margin-top: 30px;
+}
+
+#idAddPhotoBtn {
+	width: 50%;
+	width: fit-content;
+	align-self: center;
+	margin-bottom: 0;
+	margin-top: 48px;
+	padding: 0 48px;
+	font-size: 14px;
+	font-family: "Syne";
+	cursor: pointer;
+}
+
+#idAddPhotoBtn:hover {
+	background-color: #0E2F28;
+}
+
+#divIcones {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 32px;
+	width: 630px;
+	position: relative;
+	left: -100px;
+}
+
+#divIcones i {
+	cursor: pointer;
+}
+
+#idBack,
+#idClose {
+	font-size: 21px;
+	cursor: pointer;
+}
+
+#idDeleteGallery {
+	text-align: right;
+	width: fit-content;
+	align-self: center;
+	padding-top: 23px;
+	color: #D65353;
+	font-family: "Syne";
+	font-weight: 400;
+	font-size: 14px;
+}
+
+.idPhotosGallery {
+	width: 100%;
+	display: grid;
+	margin: auto;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+	color: inherit;
+}
+
+.idPhotosGallery img {
+	width: 100%;
+}
+
+.idPhotosGallery figcaption {
+	color: #0000
+}
+
+.idDivTrash {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 4px;
+	margin: 5px;
+	color: #FFFFFF;
+	background-color: #000000;
+	border-radius: 5px;
+	width: fit-content;
+	height: fit-content;
+	cursor: pointer;
+}
+
+.fa-solid.fa-arrows-up-down-left-right,
+.fa-solid.fa-trash-can {
+
+	font-size: 9px;
+	color: #FFFFFF;
+	background-color: #000000;
+	border-radius: 5px;
+
+}
+
+.idDivMoving {
+	position: absolute;
+	top: 0;
+	left: 35%;
+	padding: 4px;
+	margin: 5px;
+	color: #FFFFFF;
+	background-color: #000000;
+	border-radius: 5px;
+	width: fit-content;
+	height: fit-content;
+}
+
+/* --------------Formulaire ajout de photo-------------- */
+#addPhotoForm {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#divBlue {
+	width: 420px;
+	background-color: #E8F1F6;
+}
+
+#divImportPhoto {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#divImportPhoto p {
+	font-size: 10px;
+	padding: 7px;
+}
+
+#divImportPhoto i {
+	padding: 26px 0 21px;
+	font-size: 60px;
+	opacity: 0.2;
+}
+
+#addPhotoBtn input[type="file"] {
+	display: none;
+}
+
+#addPhotoBtn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #CBD6DC;
+	width: 173px;
+	height: 36px;
+	font-weight: 500;
+	color: #306685;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+#divFormAddPhoto {
+	display: flex;
+	flex-direction: column;
+	width:420px;
+}
+
+#divFormAddPhoto input {
+	display: flex;
+	height: 51px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	outline: none;
+	padding-left: 16px;
+	color: #444444;
+	font-weight: 400;
+	font-family: "Work Sans";
+}
+
+#divFormAddPhoto label {
+	margin: 2em 0 1em 0;
+	color: #3D3D3D;
+	font-weight: 500;
+	font-family: "Work Sans";
+}
+
+#divFormAddPhoto input[type="submit"] {
+	font-family: 'Syne';
+	font-weight: 700;
+	background-color: #1D6154;
+	color: #FFFFFF;
+	width: 237px;
+	height: 36px;
+	text-align: center;
+	border-radius: 60px;
+	padding: 0 49px;
+	margin-bottom: 50px;;
+}
+
+#divFormAddPhoto input[type="submit"]:hover {
+	background-color: #0E2F28;
+}
+#addPhotoSubmitBtn{
+margin:auto;
+}
+#miniPhoto {
+	width: 100%;
+	height: 160px;
+	object-fit: contain;
+}
+
+#photoCategories {
+	font-family: 'Work Sans';
+	color: #444444;
+	font-weight: 400;
+	display: flex;
+	height: 51px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	background-color: #FFFFFF;
+	padding-left: 16px;
+	outline: none;
+}
+
+/*#photoCategory {
+	font-family: 'Work Sans';
+	color: #444444;
+	font-weight: 400;
+	display: flex;
+	height: 51px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	background-color: #FFFFFF;
+	padding-left: 16px;
+	outline: none;
+}*/
+
+#line2 {
+	border: 1px solid #B3B3B3;
+	margin: 47px 0 ;
+	width: 100%;
+}
+ 
+/* pour l'affichage sous firefox, sinon fonctionne sur chrome*/
+select.photoCategories>option {
+	font-size: 14px;
+	font-weight: 400;
+	font-family: 'Work Sans';
+	font-size: 16px;
+	color: #444444;
+	background-color: #f2f2f2;
+	outline: none;
+	border: 1px solid green;
 }
