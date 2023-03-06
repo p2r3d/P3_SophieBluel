@@ -33,6 +33,8 @@ async function addWork(works, cat) {
         data.categoryId = parseInt(data.categoryId);
         works.push(data);
         // Affichage de la galerie
+        document.querySelector("#addPhotoForm").reset();
+
         displayGallery(works);
         //Affichage dans la mini-galerie
         updateWorks(works);

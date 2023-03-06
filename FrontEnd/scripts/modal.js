@@ -33,6 +33,9 @@
     //on remet le focus sur l'élément préalablement sélectionné
     //if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
     e.preventDefault();
+    modal.querySelector("#addPhotoForm").reset();
+    const back = document.querySelector("#idBack");
+    back.click();
     document.querySelectorAll(".js-modal").forEach(a => {
       a.removeEventListener("click", openModal);
       a.addEventListener("click", openModal);
@@ -42,6 +45,8 @@
     modal.removeAttribute("aria-modal");
     modal.removeEventListener("click", closeModal);
     modal.querySelector("#idClose").removeEventListener("click", closeModal);
+    modal.querySelector("#idAddPhotoBtn").removeEventListener("click", closeModal);
+
     modal.querySelector(".js-modal-close").removeEventListener("click", closeModal);
     modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation);
 

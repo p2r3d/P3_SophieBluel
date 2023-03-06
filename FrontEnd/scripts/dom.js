@@ -188,6 +188,7 @@ function fillModal(worksSent, categories) {
   function openAddPhotoForm(e) {
     e.preventDefault();
     AddPhotoBtn.removeEventListener("click", openAddPhotoForm);
+    // affichage du formulaire
     document.querySelector("#addPhotoForm").reset();
     document.querySelector("#thumbnail").style.display = "none";
     document.querySelector("#divImportPhoto").style.display = null;
@@ -195,8 +196,6 @@ function fillModal(worksSent, categories) {
     document.querySelector("#miniPhoto").src = "";
     document.querySelector("#workAddPhotoInput").innerHTML = "";
     document.querySelector("#thumbnail").src = "";
-
-    // affichage du formulaire
     document.querySelector("#modalTitle").innerText = "Ajout photo";
     document.querySelector(".idPhotosGallery").style.display = "none";
     document.querySelector("#idAddPhotoBtn").style.display = "none";
@@ -204,8 +203,8 @@ function fillModal(worksSent, categories) {
     document.querySelector("#addPhotoForm").style.display = null;
     document.querySelector("#idBack").style.display = null;
     document.querySelector("#divIcones").style.justifyContent = "space-between";
-    const line1 = document.getElementById("line1");
-    line1.style.display = "none";
+    document.getElementById("line1").style.display = "none";
+  
 
     //  chargement du thumbnail
     const loadPhotoBtn = document.getElementById("workAddPhotoInput");
@@ -247,6 +246,7 @@ function fillModal(worksSent, categories) {
 // mise à jour de l'ajout ou de la suppression de travaux
 function updateWorks(worksSent) {
   document.querySelector(".idPhotosGallery").innerHTML = "";
+
   // galerie de thumbnails
   for (let i in worksSent) {
     let workSenti = worksSent[i];
