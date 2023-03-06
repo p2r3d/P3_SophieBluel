@@ -38,8 +38,6 @@ fetchWorks().then(worksFetched => {
     if (sessionStorage.getItem("access_token")) {
       showWhenConnected(worksFetched, categoriesFetched);
      }
-
   })
-  
 })
 

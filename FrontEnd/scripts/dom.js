@@ -10,11 +10,7 @@ function createElement(tagName, classes = []) {
 // AFFICHAGE DE LA GALERIE
 function displayGallery(worksSent) {
   document.querySelector(".gallery").innerHTML = "";
-  // on cache les liens modifier et le bandeau
-  //hideWhenNotConnected();
-
   const categoriesNames = new Set();
-  // affichage des travaux : image + titre
 
   // récup des catégories dans l'objet Set
   for (let i in worksSent) {
@@ -77,7 +73,7 @@ function displayFilters(works, categories) {
 function updateFilterBtn(filterBtn) {
   const filters = document.getElementsByClassName("btn");
   for (i = 0; i < filters.length; i++) {
-    //filters[i].classList.remove("SelectedFilter");
+    filters[i].classList.remove("SelectedFilter");
   }
   filterBtn.classList.add("SelectedFilter");
 }

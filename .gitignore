@@ -3,4 +3,5 @@
 *.jpg
 *.png
 trashbin.txt
-.sqlite
+Backend/database.sqlite
+*.sqlite

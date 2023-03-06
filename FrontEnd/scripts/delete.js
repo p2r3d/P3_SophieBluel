@@ -15,7 +15,6 @@ async function fetchDelete(WorkId) {
         if (!response.ok) {
           throw new Error("Erreur lors de la requête serveur");
         }
-        else { console.log('ok delete!') }
       })
       .catch((error) => {
         console.error(error.message);
