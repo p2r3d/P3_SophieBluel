@@ -37,8 +37,6 @@ fetchWorks().then(worksFetched => {
   fetchCategories().then(categoriesFetched => {
     // AFFICHAGE DU PORTFOLIO
     if ((worksFetched !== []) && (categoriesFetched !== [])) {
-      console.log(worksFetched); console.log(categoriesFetched);
-
       displayFilters(worksFetched, categoriesFetched);
       // utilisateur connecté
     if (sessionStorage.getItem("access_token")) {

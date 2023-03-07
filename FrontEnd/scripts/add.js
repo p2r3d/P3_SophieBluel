@@ -25,15 +25,16 @@ async function addWork(works, cat) {
         return data;
       })
       .then(data => {
-        document.querySelector("#addPhotoForm").reset();
+        //document.querySelector("#addPhotoForm").reset();
         // ajout de l'identifiant de la catégorie dans le nouveau projet
         data.category = {};
         data.category = (cat[parseInt(data.categoryId) - 1]);
         data.categoryId = parseInt(data.categoryId);
         works.push(data);
         // Affichage de la galerie
-        document.querySelector("#addPhotoForm").reset();
-        displayGallery(works);
+        displayGallery(works);  
+        // mise à jour de la barre des filtres
+        updateFilterBtn(document.querySelector("#IdBtnAll"))
         //Affichage dans la mini-galerie
         updateWorks(works);
         // retour vers modale  mini-galerie
