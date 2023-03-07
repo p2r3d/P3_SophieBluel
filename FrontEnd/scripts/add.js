@@ -9,7 +9,6 @@ async function addWork(works, cat) {
     const opt = document.querySelector("#photoCategories");
     const optId = parseInt(opt.selectedOptions[0].id);
     formData.append("category", parseInt(optId));
-
     // envoi d'une demande au serveur
     fetch(`http://localhost:5678/api/works`, {
       method: 'POST',
@@ -34,12 +33,10 @@ async function addWork(works, cat) {
         works.push(data);
         // Affichage de la galerie
         document.querySelector("#addPhotoForm").reset();
-
         displayGallery(works);
         //Affichage dans la mini-galerie
         updateWorks(works);
-
-        // retour vers modale  mini-galerie
+        // retour vers modale  mini-galerie
         const idBack = document.querySelector("#idBack");
         idBack.click();
       })
