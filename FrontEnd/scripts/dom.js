@@ -171,6 +171,8 @@ function fillModal(worksSent, categories) {
       let indexToDelete = worksSent.indexOf(WorkToDelete);
       worksSent.splice(indexToDelete, 1);
       displayGallery(worksSent);
+      // mise à jour de la barre des filtres
+      updateFilterBtn(document.querySelector("#IdBtnAll"));
     })
     workCard.appendChild(trashImg);
   }

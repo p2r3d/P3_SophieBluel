@@ -34,7 +34,7 @@ async function addWork(works, cat) {
         // Affichage de la galerie
         displayGallery(works);  
         // mise à jour de la barre des filtres
-        updateFilterBtn(document.querySelector("#IdBtnAll"))
+        updateFilterBtn(document.querySelector("#IdBtnAll"));
         //Affichage dans la mini-galerie
         updateWorks(works);
         // retour vers modale  mini-galerie
