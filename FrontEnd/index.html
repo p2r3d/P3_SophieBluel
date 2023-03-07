@@ -102,7 +102,7 @@
 				<hr id="line1">
 				<input type="button" class="btn SelectedFilter" id="idAddPhotoBtn" value="Ajouter une photo">
 				<p id="idDeleteGallery">Supprimer la galerie</p>
-				
+			
 				<!-- formulaire d'ajout de photo dans la modale-->
 				<form id="addPhotoForm" action="" method="post" style="display:none">
 					<div id="divBlue">
@@ -115,12 +115,12 @@
 							<p>jpg, png : 4mo max</p>
 						</div>
 						<div id="thumbnail">
-							<img id="miniPhoto" src="" style="display:none">
+							<img id="miniPhoto" src="" style="display:none" required>
 						</div>
 					</div>
 					<div id="divFormAddPhoto">
 						<label for="title">Titre</label>
-						<input type="text" name="title" id="idTitleAddPhoto">
+						<input type="text" name="title" id="idTitleAddPhoto" required>
 						<label for="photoCategories">Catégorie</label>
 						<select id="photoCategories" required></select>
 						<hr id="line2">

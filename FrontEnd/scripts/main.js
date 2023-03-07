@@ -14,7 +14,11 @@ async function fetchWorks() {
 
 fetchWorks().then(worksFetched => {
   // AFFICHAGE DU PORTFOLIO
-  displayGallery(worksFetched);
+  if (worksFetched !== []) {
+    displayGallery(worksFetched);
+  } else {
+    alert('pas de travaux dans la base de données');
+  }
 
   // AFFICHAGE DES FILTRES
   async function fetchCategories() {
@@ -32,12 +36,20 @@ fetchWorks().then(worksFetched => {
   }
   fetchCategories().then(categoriesFetched => {
     // AFFICHAGE DU PORTFOLIO
-    displayFilters(worksFetched, categoriesFetched);
+    if ((worksFetched !== []) && (categoriesFetched !== [])) {
+      console.log(worksFetched); console.log(categoriesFetched);
 
-    // utilisateur connecté
+      displayFilters(worksFetched, categoriesFetched);
+      // utilisateur connecté
     if (sessionStorage.getItem("access_token")) {
       showWhenConnected(worksFetched, categoriesFetched);
-     }
+    }
+    } else {
+      console.log("pas d'affichages car pas de travaux et de catégories");
+      showWhenConnected();
+    }
+    
   })
 })
+
 

@@ -80,18 +80,18 @@ function updateFilterBtn(filterBtn) {
 
 // AFFICHAGE QUAND CONNECTÉ
 function showWhenConnected(worksFetched, categoriesFetched) {
-  const filters = document.getElementsByClassName("filters");
-  filters[0].classList.add("hidden");
+  if ((worksFetched !== []) && (categoriesFetched!== [])) {
+    const filters = document.getElementsByClassName("filters");
+    filters[0].classList.add("hidden");
+    const headBand = document.getElementsByClassName("divheadband");
+    headBand[0].style.display = null;
+    //remplissage modale
+    fillModal(worksFetched, categoriesFetched);
+  } else {}
   document.querySelectorAll(".js-modal").forEach(a => {
     a.style.display = null;
     a.addEventListener("click", openModal);
-    //alert("when connected");
-
   })
-  const headBand = document.getElementsByClassName("divheadband");
-  headBand[0].style.display = null;
-  //remplissage modale
-  fillModal(worksFetched, categoriesFetched);
 }
 
 // Affichage de l'état de l'authentification (login/logout) dans la barre de navigation
@@ -200,7 +200,7 @@ function fillModal(worksSent, categories) {
     document.querySelector("#idBack").style.display = null;
     document.querySelector("#divIcones").style.justifyContent = "space-between";
     document.getElementById("line1").style.display = "none";
-  
+
 
     //  chargement du thumbnail
     const loadPhotoBtn = document.getElementById("workAddPhotoInput");
@@ -238,51 +238,80 @@ function fillModal(worksSent, categories) {
     document.querySelector("#addPhotoForm").reset();
     addPhotoForm.addEventListener('submit', function (e) { })
   })
+
+  // suppression de la galerie
+  const deleteGallery = document.querySelector("#idDeleteGallery");
+  deleteGallery.addEventListener("click", function (e) {
+    e.preventDefault();
+    if (confirm("Voulez-vous vraiment supprimer l'ensemble de la galerie?")) {
+      for (j in worksSent) {
+        fetchDelete(parseInt(worksSent[j].id));
+        console.log("delete ", parseInt(worksSent[j].id))
+      }
+      worksSent=[];
+      console.log("worksSent vide", worksSent);
+      document.querySelector("#modalTitle").innerText = "La galerie est vide";
+      updateWorks(); 
+      document.querySelector(".gallery").innerHTML = "";
+      document.querySelector("#idDeleteGallery").style.display = "none";
+      document.querySelector(".filters").style.display = "none";
+    } else {
+      alert('annulé');
+    }
+  })
 }
 // mise à jour de l'ajout ou de la suppression de travaux
 function updateWorks(worksSent) {
-  document.querySelector(".idPhotosGallery").innerHTML = "";
+  console.log("qd suppr",worksSent);
+  if (typeof worksSent !== "undefined") {
+    document.querySelector(".idPhotosGallery").innerHTML = "";
 
-  // galerie de thumbnails
-  for (let i in worksSent) {
-    let workSenti = worksSent[i];
-    const workCard = createElement("figure");
-    workCard.classList.add("workCard");
-    document.querySelector(".idPhotosGallery").appendChild(workCard);
+    // galerie de thumbnails
+    for (let i in worksSent) {
+      let workSenti = worksSent[i];
+      const workCard = createElement("figure");
+      workCard.classList.add("workCard");
+      document.querySelector(".idPhotosGallery").appendChild(workCard);
 
-    // affichage de chaque image
-    const workImg = createElement("img", ["cardImg"]);
-    workImg.setAttribute("crossorigin", "anonymous");
-    workImg.src = workSenti.imageUrl;
-    workCard.appendChild(workImg);
+      // affichage de chaque image
+      const workImg = createElement("img", ["cardImg"]);
+      workImg.setAttribute("crossorigin", "anonymous");
+      workImg.src = workSenti.imageUrl;
+      workCard.appendChild(workImg);
 
-    // affichage du titre de l'image
-    const workTitle = createElement("figcaption");
-    workTitle.innerText = "éditer";
-    workTitle.style.color = "#000000";
-    workCard.appendChild(workTitle);
+      // affichage du titre de l'image
+      const workTitle = createElement("figcaption");
+      workTitle.innerText = "éditer";
+      workTitle.style.color = "#000000";
+      workCard.appendChild(workTitle);
 
-    // affichage de la poubelle sur chacune des images
-    const trashImg = createElement("i", ["idDivTrash"]);
-    trashImg.classList.add("fa-solid", "fa-trash-can");
+      // affichage de la poubelle sur chacune des images
+      const trashImg = createElement("i", ["idDivTrash"]);
+      trashImg.classList.add("fa-solid", "fa-trash-can");
 
-    // si clic sur la poubelle 
-    trashImg.addEventListener("click", function (e) {
-      e.preventDefault();
-      //trashImg.removeEventListener("click", function(e) {});
-      workCard.style.display = "none";
-      fetchDelete(workSenti.id);
-      // on enlève le work de la liste 
-      let WorkToDelete = worksSent.find(objet => objet.id === workSenti.id);
-      let indexToDelete = worksSent.indexOf(WorkToDelete);
-      worksSent.splice(indexToDelete, 1);
-      displayGallery(worksSent);
-    })
-    workCard.appendChild(trashImg);
+      // si clic sur la poubelle 
+      trashImg.addEventListener("click", function (e) {
+        e.preventDefault();
+        //trashImg.removeEventListener("click", function(e) {});
+        workCard.style.display = "none";
+        fetchDelete(workSenti.id);
+        // on enlève le work de la liste 
+        let WorkToDelete = worksSent.find(objet => objet.id === workSenti.id);
+        let indexToDelete = worksSent.indexOf(WorkToDelete);
+        worksSent.splice(indexToDelete, 1);
+        displayGallery(worksSent);
+      })
+      workCard.appendChild(trashImg);
+    }
+    // affichage de l'icône de déplacement sur la 1ère photo
+    const card = document.querySelectorAll(".workCard");
+    const movingImg = createElement("i", ["idDivMoving"]);
+    movingImg.classList.add("fa-solid", "fa-arrows-up-down-left-right");
+    card[0].appendChild(movingImg);
   }
-  // affichage de l'icône de déplacement sur la 1ère photo
-  const card = document.querySelectorAll(".workCard");
-  const movingImg = createElement("i", ["idDivMoving"]);
-  movingImg.classList.add("fa-solid", "fa-arrows-up-down-left-right");
-  card[0].appendChild(movingImg);
+  else {
+    alert('ok');
+    document.querySelector(".idPhotosGallery").innerHTML = "";
+
+  }
 }
