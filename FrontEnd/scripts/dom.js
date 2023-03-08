@@ -182,7 +182,7 @@ function fillModal(worksSent, categories) {
     const movingImg = createElement("i", ["idDivMoving"]);
     movingImg.classList.add("fa-solid", "fa-arrows-up-down-left-right");
     card[0].appendChild(movingImg);
-  }
+  } 
 
   // bouton ouvrant le formulaire "ajout de photos"
   const AddPhotoBtn = document.querySelector("#idAddPhotoBtn");
@@ -237,7 +237,7 @@ function fillModal(worksSent, categories) {
         loadPhotoBtn.addEventListener("change", loadPhotoFile);
         document.querySelector("#photoWeight").innerText="la taille du fichier doit être inférieure à 4 Mo";
         document.querySelector("#photoWeight").style.color="red";
-;      } 
+      } 
     }
     AddPhotoBtn.addEventListener("click", openAddPhotoForm);
   }
@@ -271,7 +271,7 @@ function fillModal(worksSent, categories) {
       updateWorks();
       document.querySelector(".gallery").innerHTML = "";
       document.querySelector("#idDeleteGallery").style.display = "none";
-      document.querySelector(".filters").style.display = "none";
+      document.querySelector(".filters").style.display = "none";    
     }
   })
 }

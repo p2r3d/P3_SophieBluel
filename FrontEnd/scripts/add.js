@@ -25,19 +25,22 @@ async function addWork(works, cat) {
         return data;
       })
       .then(data => {
-        //document.querySelector("#addPhotoForm").reset();
         // ajout de l'identifiant de la catégorie dans le nouveau projet
         data.category = {};
         data.category = (cat[parseInt(data.categoryId) - 1]);
         data.categoryId = parseInt(data.categoryId);
         works.push(data);
         // Affichage de la galerie
-        displayGallery(works);  
+        displayGallery(works);
         // mise à jour de la barre des filtres
+        if (works.length ===1){
+          displayFilters(works,cat);
+          document.location.reload();
+        }
         updateFilterBtn(document.querySelector("#IdBtnAll"));
         //Affichage dans la mini-galerie
         updateWorks(works);
-        // retour vers modale  mini-galerie
+        // retour vers modale  mini-galerie
         const idBack = document.querySelector("#idBack");
         idBack.click();
       })

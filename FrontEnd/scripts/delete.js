@@ -15,6 +15,8 @@ async function fetchDelete(WorkId) {
         if (!response.ok) {
           throw new Error("Erreur lors de la requête serveur");
         }
+        // mise à jour de la barre des filtres
+        updateFilterBtn(document.querySelector("#IdBtnAll"));
       })
       .catch((error) => {
         console.error(error.message);
