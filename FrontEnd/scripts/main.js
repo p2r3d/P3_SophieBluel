@@ -34,6 +34,8 @@ fetchWorks().then(worksFetched => {
       console.error(error);
     }
   }
+
+  
   fetchCategories().then(categoriesFetched => {
     // AFFICHAGE DU PORTFOLIO
     if ((worksFetched !== []) && (categoriesFetched !== [])) {
