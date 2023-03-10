@@ -81,7 +81,7 @@ export async function FetchAddWork(works, cat) {
 }
 
 // Suppression de travaux à partir de l'icône poubelle de la modale
-export async function fetchDelete(WorkId) {
+export async function fetchDeleteWork(WorkId) {
   const token = sessionStorage.getItem("access_token");
   if (sessionStorage.getItem("access_token") != null) {
     // envoi d'une demande au serveur

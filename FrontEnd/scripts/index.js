@@ -1,4 +1,4 @@
-import { FetchAddWork, fetchDelete } from './store.js';
+import { FetchAddWork, fetchDeleteWork } from './store.js';
 
 // CREATION D'UN ELEMENT HTML
 function createElement(tagName, classes = []) {
@@ -114,33 +114,7 @@ export function showWhenConnected(worksFetched, categoriesFetched) {
 }
 
 // REMPLISSAGE DE LA MODALE
-function fillModal(worksSent, categories) {
-  document.querySelector(".idPhotosGallery").innerHTML = "";
-
-  // titre de la modale
-  document.querySelector("#modalTitle").innerText = "Galerie photos";
-
-  // seule l'icône de fermeture apparait et se loge à droite
-  document.querySelector("#idBack").style.display = "none";
-  document.querySelector("#divIcones").style.justifyContent = "right";
-
-  // si appui sur icône de retour
-  const back = document.querySelector("#idBack");
-  back.addEventListener("click", returnBack);
-  function returnBack(e) {
-    e.preventDefault();
-    document.querySelector("#addPhotoForm").reset();
-    document.querySelector("#idBack").style.display = "none";
-    document.querySelector("#divIcones").style.justifyContent = "right";
-    document.querySelector("#addPhotoForm").style.display = "none";
-    document.querySelector(".idPhotosGallery").style.display = "";
-    document.querySelector("#idAddPhotoBtn").style.display = "";
-    document.querySelector("#idDeleteGallery").style.display = "";
-    document.querySelector("#modalTitle").innerText = "Galerie photos";
-    back.addEventListener("click", returnBack);
-    AddPhotoBtn.addEventListener("click", openAddPhotoForm);
-  }
-
+function displayThumbnailsGallery(worksSent) {
   // galerie de thumbnails
   for (let i in worksSent) {
     let workSenti = worksSent[i];
@@ -168,7 +142,7 @@ function fillModal(worksSent, categories) {
     trashImg.addEventListener("click", function (e) {
       e.preventDefault();
       workCard.style.display = "none";
-       fetchDelete(workSenti.id);
+      fetchDeleteWork(workSenti.id);
       // on enlève le work de la liste 
       let WorkToDelete = worksSent.find(objet => objet.id === workSenti.id);
       let indexToDelete = worksSent.indexOf(WorkToDelete);
@@ -179,6 +153,38 @@ function fillModal(worksSent, categories) {
     })
     workCard.appendChild(trashImg);
   }
+}
+
+function fillModal(worksSent, categories) {
+  document.querySelector(".idPhotosGallery").innerHTML = "";
+
+  // titre de la modale
+  document.querySelector("#modalTitle").innerText = "Galerie photos";
+
+  // seule l'icône de fermeture apparait et se loge à droite
+  document.querySelector("#idBack").style.display = "none";
+  document.querySelector("#divIcones").style.justifyContent = "right";
+
+  // si appui sur icône de retour
+  const back = document.querySelector("#idBack");
+  back.addEventListener("click", returnBack);
+  function returnBack(e) {
+    e.preventDefault();
+    document.querySelector("#addPhotoForm").reset();
+    document.querySelector("#idBack").style.display = "none";
+    document.querySelector("#divIcones").style.justifyContent = "right";
+    document.querySelector("#addPhotoForm").style.display = "none";
+    document.querySelector(".idPhotosGallery").style.display = "";
+    document.querySelector("#idAddPhotoBtn").style.display = "";
+    document.querySelector("#idDeleteGallery").style.display = "";
+    document.querySelector("#modalTitle").innerText = "Galerie photos";
+    back.addEventListener("click", returnBack);
+    AddPhotoBtn.addEventListener("click", openAddPhotoForm);
+  }
+
+  // affichage de la galerie de la modale
+  displayThumbnailsGallery(worksSent);
+  
   // affichage de l'icône de déplacement sur la 1ère photo lorsque la galerie n'est pas vide !
   if (worksSent.length !== 0) {
     const card = document.querySelectorAll(".workCard");
@@ -212,7 +218,6 @@ function fillModal(worksSent, categories) {
     document.querySelector("#divIcones").style.justifyContent = "space-between";
     document.getElementById("line1").style.display = "none";
 
-
     //  chargement du thumbnail
     const loadPhotoBtn = document.getElementById("workAddPhotoInput");
     loadPhotoBtn.addEventListener("change", loadPhotoFile);
@@ -232,7 +237,6 @@ function fillModal(worksSent, categories) {
         divImportPhoto.style.display = "none";
         loadPhotoBtn.removeEventListener("change", loadPhotoFile);
         loadPhotoBtn.addEventListener("change", loadPhotoFile);
-
       } else {
         console.log('Le fichier est supérieur à 4 Mo');
         file=null;
@@ -267,7 +271,7 @@ function fillModal(worksSent, categories) {
     e.preventDefault();
     if (confirm("Voulez-vous vraiment supprimer l'ensemble de la galerie?")) {
       for (let j in worksSent) {
-        fetchDelete(parseInt(worksSent[j].id));
+        fetchDeleteWork(parseInt(worksSent[j].id));
       }
       worksSent = [];
       document.querySelector("#modalTitle").innerText = "La galerie est vide";
@@ -282,58 +286,16 @@ function fillModal(worksSent, categories) {
 export function updateWorks(worksSent) {
   if (typeof worksSent !== "undefined") {
     document.querySelector(".idPhotosGallery").innerHTML = "";
-
-    // galerie de thumbnails
-    for (let i in worksSent) {
-      let workSenti = worksSent[i];
-      const workCard = createElement("figure");
-      workCard.classList.add("workCard");
-      document.querySelector(".idPhotosGallery").appendChild(workCard);
-
-      // affichage de chaque image
-      const workImg = createElement("img", ["cardImg"]);
-      workImg.setAttribute("crossorigin", "anonymous");
-      workImg.src = workSenti.imageUrl;
-      workCard.appendChild(workImg);
-
-      // affichage du titre de l'image
-      const workTitle = createElement("figcaption");
-      workTitle.innerText = "éditer";
-      workTitle.style.color = "#000000";
-      workCard.appendChild(workTitle);
-
-      // affichage de la poubelle sur chacune des images
-      const trashImg = createElement("i", ["idDivTrash"]);
-      trashImg.classList.add("fa-solid", "fa-trash-can");
-
-      // si clic sur la poubelle 
-      trashImg.addEventListener("click", function (e) {
-        e.preventDefault();
-        //trashImg.removeEventListener("click", function(e) {});
-        workCard.style.display = "none";
-        fetchDelete(workSenti.id);
-        // on enlève le work de la liste 
-        let WorkToDelete = worksSent.find(objet => objet.id === workSenti.id);
-        let indexToDelete = worksSent.indexOf(WorkToDelete);
-        worksSent.splice(indexToDelete, 1);
-        displayGallery(worksSent);
-      })
-      workCard.appendChild(trashImg);
-    }
-    // affichage de l'icône de déplacement sur la 1ère photo
-    const card = document.querySelectorAll(".workCard");
-    const movingImg = createElement("i", ["idDivMoving"]);
-    movingImg.classList.add("fa-solid", "fa-arrows-up-down-left-right");
-    card[0].appendChild(movingImg);
+    displayThumbnailsGallery(worksSent);
   }
   else {
     document.querySelector(".idPhotosGallery").innerHTML = "";
   }
 }
-
 //--------------------------------------------------------------------
 // AFFICHAGE DE LA MODALE
 let modal = null;
+// ouverture de la fenêtre modale
 const openModal = function (e) {
   e.preventDefault();
   modal = document.querySelector(e.target.getAttribute("href"));
@@ -350,7 +312,7 @@ const openModal = function (e) {
   })
   modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation);
 }
-
+// fermeture de la fenêtre modale
 const closeModal = function (e) {
   if (modal === null) return;
   e.preventDefault();
@@ -373,7 +335,6 @@ const closeModal = function (e) {
   modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation);
   modal = null;
 }
-
 // empêche la propagation de l'événement vers les parents
 const stopPropagation = function (e) {
   e.stopPropagation();
