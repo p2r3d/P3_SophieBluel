@@ -6,7 +6,16 @@ form.addEventListener("submit", async function (event) {
 
   // récup email
   const userLogin = document.getElementById("idEmail").value;
-
+  // test de l'email
+  const msg = document.getElementById('idErrorMsg');
+  msg.innerText = "";
+  // test de la validité de l'email ainsi que les éventuelles espaces
+  var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (!reg.test(String(userLogin).toLowerCase())) {
+    console.log(userLogin);
+    msg.innerText = "Adresse email incorrecte";
+    return;
+  }
   // récup password
   const userPwd = document.getElementById("idPwd").value;
 
@@ -24,20 +33,10 @@ form.addEventListener("submit", async function (event) {
   })
     .then((response) => {
       if (!response.ok) {
-        // récup du conteneur html du message d'erreur
-        const msg = document.getElementById('idErrorMsg');
-        msg.innerText = "";
-        // test de la validité de l'email
-        var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (!reg.test(String(userLogin).toLowerCase())) {
-          msg.innerText = "Adresse email incorrecte";
-        }
-
         // test sur combinaison email/password
         if (response.status === 401) {
           msg.innerText = "Erreur dans l'identifiant ou le mot de passe";
         }
-
         // affichage message d'erreur 
         if (msg.innerText == "") {
           msg.innerText = "Erreur lors de la requête";
@@ -56,11 +55,9 @@ form.addEventListener("submit", async function (event) {
     })
 });
 
-
 // lOGOUT
 const listeLi = document.querySelector("ul");
 const loginLi = listeLi.querySelectorAll("li")[2];
-
 if (sessionStorage.getItem("access_token") != null) {
   loginLi.innerText = "logout";
   loginLi.addEventListener("click", function () {

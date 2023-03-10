@@ -20,7 +20,7 @@ import { displayGallery, displayFilters, showWhenConnected } from './index.js';
         showWhenConnected(worksFetched, categoriesFetched);
       }
     } else {
-      console.log("pas d'affichages car pas de travaux et de catégories");
+      console.log("pas d'affichage car pas de travaux et de catégories");
       showWhenConnected();
     }
   })

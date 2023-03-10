@@ -194,7 +194,7 @@ header {
 	margin-left: 20px;
 	font-family: 'Syne';
 	font-size: 14px;
-	cursor: pointer;
+	/*cursor:pointer;*/
 }
 
 section {
@@ -290,14 +290,6 @@ li:hover {
 	width: 100%;
 }
 
-/*.modifyLink1 {
-	gap: 5px;
-	margin: 10px 0;
-}
-.modifyLink2 {
-	gap: 5px;
-	/*margin: 10px 0;*/
-/*}*/
 .divProjectTitle {
 	display: flex;
 	flex-direction: row;
@@ -312,7 +304,6 @@ li:hover {
 
 #portfolio {
 	margin: 0px 5rem;
-
 }
 
 #portfolio h2 {
@@ -321,7 +312,6 @@ li:hover {
 }
 
 /* GALERIE */
-
 .gallery {
 	display: grid;
 	margin: 50px auto;
