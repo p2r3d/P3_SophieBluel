@@ -39,6 +39,7 @@ export async function FetchAddWork(works, cat) {
     const opt = document.querySelector("#photoCategories");
     const optId = parseInt(opt.selectedOptions[0].id);
     formData.append("category", parseInt(optId));
+
     // envoi d'une demande au serveur
     fetch(`http://localhost:5678/api/works`, {
       method: 'POST',

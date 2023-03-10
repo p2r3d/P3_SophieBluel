@@ -1,4 +1,4 @@
-import { FetchAddWork, fetchDeleteWork } from './store.js';
+import { FetchAddWork, fetchDeleteWork } from "./store.js";
 
 // CREATION D'UN ELEMENT HTML
 function createElement(tagName, classes = []) {
@@ -208,6 +208,8 @@ function fillModal(worksSent, categories) {
     document.querySelector("#miniPhoto").style.display = null;
     document.querySelector("#miniPhoto").src = "";
     document.querySelector("#workAddPhotoInput").innerHTML = "";
+    document.querySelector("#addPhotoMsg").innerText = "jpg, png : 4mo max";
+    document.querySelector("#addPhotoMsg").style.color = "";
     document.querySelector("#thumbnail").src = "";
     document.querySelector("#modalTitle").innerText = "Ajout photo";
     document.querySelector(".idPhotosGallery").style.display = "none";
@@ -225,9 +227,9 @@ function fillModal(worksSent, categories) {
       e.preventDefault();
       let file = null;
       file = e.target.files[0];
-      document.querySelector("#photoWeight").innerText = "jpg, png : 4mo max";
-      document.querySelector("#photoWeight").style.color = "";
-      if (file.size <= 4 * 1024 * 1024) {
+      document.querySelector("#addPhotoMsg").innerText = "jpg, png : 4mo max";
+      document.querySelector("#addPhotoMsg").style.color = "";
+      if (file.size <= 2 * 1024 * 1024) {
         document.querySelector("#thumbnail").style.display = "";
         const inputPhoto = document.getElementById("miniPhoto");
         inputPhoto.style.display = "";
@@ -242,8 +244,8 @@ function fillModal(worksSent, categories) {
         file=null;
         loadPhotoBtn.removeEventListener("change", loadPhotoFile);
         loadPhotoBtn.addEventListener("change", loadPhotoFile);
-        document.querySelector("#photoWeight").innerText="la taille du fichier doit être inférieure à 4 Mo";
-        document.querySelector("#photoWeight").style.color="red";
+        document.querySelector("#addPhotoMsg").innerText="la taille du fichier doit être inférieure à 4 Mo";
+        document.querySelector("#addPhotoMsg").style.color="red";
       } 
     }
     AddPhotoBtn.addEventListener("click", openAddPhotoForm);
@@ -260,6 +262,13 @@ function fillModal(worksSent, categories) {
   const addPhotoForm = document.querySelector("#addPhotoForm");
   addPhotoForm.addEventListener('submit', function (e) {
     e.preventDefault();
+    const inputPhotoBtn = document.querySelector("#workAddPhotoInput");
+    if (inputPhotoBtn.files[0] === undefined) {
+      console.log("undefined");
+      document.querySelector("#addPhotoMsg").innerText = "Une photo doit être ajoutée svp";
+      document.querySelector("#addPhotoMsg").style.color = "red"
+      return;
+    }
     FetchAddWork(worksSent, categories);
     addPhotoForm.removeEventListener('submit', function (e) { })
     addPhotoForm.addEventListener('submit', function (e) { })
