@@ -1,3 +1,5 @@
+import { FetchAddWork, fetchDelete } from './store.js';
+
 // CREATION D'UN ELEMENT HTML
 function createElement(tagName, classes = []) {
   const element = document.createElement(tagName);
@@ -8,7 +10,7 @@ function createElement(tagName, classes = []) {
 }
 
 // AFFICHAGE DE LA GALERIE
-function displayGallery(worksSent) {
+export function displayGallery(worksSent) {
   document.querySelector(".gallery").innerHTML = "";
   const categoriesNames = new Set();
 
@@ -38,7 +40,7 @@ function displayGallery(worksSent) {
 
 
 // AFFICHAGE DES FILTRES
-function displayFilters(works, categories) {
+export function displayFilters(works, categories) {
   document.querySelector(".btn").innerHTML = "";
 
   const portfolio = document.getElementById("portfolio");
@@ -73,40 +75,41 @@ function displayFilters(works, categories) {
 }
 
 // MISE A JOUR DE L'APPARENCE DES BOUTONS FILTRES
-function updateFilterBtn(filterBtn) {
+export function updateFilterBtn(filterBtn) {
   const filters = document.getElementsByClassName("btn");
-  for (i = 0; i < filters.length; i++) {
+  for (let i = 0; i < filters.length; i++) {
     filters[i].classList.remove("SelectedFilter");
   }
   filterBtn.classList.add("SelectedFilter");
 }
 
 // AFFICHAGE QUAND CONNECTÉ
-function showWhenConnected(worksFetched, categoriesFetched) {
+export function showWhenConnected(worksFetched, categoriesFetched) {
+  // Affichage de l'état de l'authentification (login/logout) dans la barre de navigation
+  const listeLi = document.querySelector("ul");
+  const loginLi = listeLi.querySelectorAll("li")[2];
+
+  if (sessionStorage.getItem("access_token") != null) {
+    loginLi.innerText = "logout";
+    loginLi.style.cursor="pointer";
+    loginLi.addEventListener("click", function () {
+      sessionStorage.clear();
+      document.location.reload();
+    })
+  }
+
   if ((worksFetched !== []) && (categoriesFetched !== [])) {
     const filters = document.getElementsByClassName("filters");
     filters[0].classList.add("hidden");
     const headBand = document.getElementsByClassName("divheadband");
     headBand[0].style.display = null;
-    //remplissage modale
+    //remplissaale
     fillModal(worksFetched, categoriesFetched);
   }
   document.querySelectorAll(".js-modal").forEach(a => {
     a.style.display = null;
     a.removeEventListener("click", openModal);
     a.addEventListener("click", openModal);
-  })
-}
-
-// Affichage de l'état de l'authentification (login/logout) dans la barre de navigation
-const listeLi = document.querySelector("ul");
-const loginLi = listeLi.querySelectorAll("li")[2];
-
-if (sessionStorage.getItem("access_token") != null) {
-  loginLi.innerText = "logout";
-  loginLi.addEventListener("click", function () {
-    sessionStorage.clear();
-    document.location.reload();
   })
 }
 
@@ -165,7 +168,7 @@ function fillModal(worksSent, categories) {
     trashImg.addEventListener("click", function (e) {
       e.preventDefault();
       workCard.style.display = "none";
-      fetchDelete(workSenti.id);
+       fetchDelete(workSenti.id);
       // on enlève le work de la liste 
       let WorkToDelete = worksSent.find(objet => objet.id === workSenti.id);
       let indexToDelete = worksSent.indexOf(WorkToDelete);
@@ -253,7 +256,7 @@ function fillModal(worksSent, categories) {
   const addPhotoForm = document.querySelector("#addPhotoForm");
   addPhotoForm.addEventListener('submit', function (e) {
     e.preventDefault();
-    addWork(worksSent, categories);
+    FetchAddWork(worksSent, categories);
     addPhotoForm.removeEventListener('submit', function (e) { })
     addPhotoForm.addEventListener('submit', function (e) { })
   })
@@ -263,7 +266,7 @@ function fillModal(worksSent, categories) {
   deleteGallery.addEventListener("click", function (e) {
     e.preventDefault();
     if (confirm("Voulez-vous vraiment supprimer l'ensemble de la galerie?")) {
-      for (j in worksSent) {
+      for (let j in worksSent) {
         fetchDelete(parseInt(worksSent[j].id));
       }
       worksSent = [];
@@ -276,7 +279,7 @@ function fillModal(worksSent, categories) {
   })
 }
 // mise à jour de l'ajout ou de la suppression de travaux
-function updateWorks(worksSent) {
+export function updateWorks(worksSent) {
   if (typeof worksSent !== "undefined") {
     document.querySelector(".idPhotosGallery").innerHTML = "";
 
@@ -326,4 +329,52 @@ function updateWorks(worksSent) {
   else {
     document.querySelector(".idPhotosGallery").innerHTML = "";
   }
+}
+
+//--------------------------------------------------------------------
+// AFFICHAGE DE LA MODALE
+let modal = null;
+const openModal = function (e) {
+  e.preventDefault();
+  modal = document.querySelector(e.target.getAttribute("href"));
+  modal.style.display = null;
+  modal.removeAttribute("aria-hidden");
+  modal.setAttribute("aria-modal", "true");
+  modal.addEventListener("click", closeModal);
+  modal.querySelector("#idClose").addEventListener("click", closeModal);
+  modal.querySelector(".js-modal-close").addEventListener("click", closeModal);
+  document.querySelectorAll(".js-modal").forEach(a => {
+    a.style.display = null;
+    a.removeEventListener("click", openModal);
+    a.addEventListener("click", openModal);
+  })
+  modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation);
+}
+
+const closeModal = function (e) {
+  if (modal === null) return;
+  e.preventDefault();
+  modal.querySelector("#addPhotoForm").reset();
+  const back = document.querySelector("#idBack");
+  back.click();
+  document.querySelectorAll(".js-modal").forEach(a => {
+    a.removeEventListener("click", openModal);
+    a.addEventListener("click", openModal);
+  })
+  modal.style.display = "none";
+  modal.setAttribute("aria-hidden", "true");
+  modal.removeAttribute("aria-modal");
+  modal.removeEventListener("click", closeModal);
+  modal.querySelector("#idClose").removeEventListener("click", closeModal);
+  modal.querySelector("#idAddPhotoBtn").removeEventListener("click", closeModal);
+  modal.querySelector(".js-modal-close").removeEventListener("click", closeModal);
+  modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation);
+  modal.querySelector("#idClose").addEventListener("click", closeModal);
+  modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation);
+  modal = null;
+}
+
+// empêche la propagation de l'événement vers les parents
+const stopPropagation = function (e) {
+  e.stopPropagation();
 }
