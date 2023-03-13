@@ -34,8 +34,6 @@ export function displayGallery(worksSent) {
     // récup de la catégorie pour l'affichage ultérieur des filtres
     categoriesNames.add(workSenti.category.name);
   }
-  // renvoi des catégories pour l'affichage des filtres
-  return (categoriesNames);
 }
 
 
@@ -99,8 +97,8 @@ export function showWhenConnected(worksFetched, categoriesFetched) {
   }
   // Barre des filtres cachée
  if ((worksFetched !== []) && (categoriesFetched !== [])) {
-   /*  const filters = document.getElementsByClassName("filters");
-    filters[0].style.display = "none";*/
+    const filters = document.getElementsByClassName("filters");
+    filters[0].style.display = "none";
     // Affichage du bandeau noir
     const headBand = document.getElementsByClassName("divheadband");
     headBand[0].style.display = null;
@@ -264,6 +262,7 @@ function fillModal(worksSent, categories) {
     catOption.setAttribute("id", parseInt(category.id))
     selectCategories.appendChild(catOption);
   }
+
   // validation du formulaire
   // affichage vert du bouton de validation 
   const idTitleAddPhoto = document.querySelector("#idTitleAddPhoto");
