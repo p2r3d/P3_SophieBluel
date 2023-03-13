@@ -12,33 +12,31 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="https://kit.fontawesome.com/b4aa609cc9.js" crossorigin="anonymous"></script>
 	<script type="module" src="./scripts/store.js" defer></script>
-	<script  type="module" src="./scripts/main.js" defer></script>
+	<script type="module" src="./scripts/main.js" defer></script>
 	<script type="module" src="./scripts/index.js" defer></script>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 
 <body>
-	<header>
-		<div class="divHeader">
-			<div class="divheadband" style="display:none">
-				<a href="#" class="headbandText">
-					<i class="fa-regular fa-pen-to-square"></i>
-					<p>Mode édition<p>
-				</a>
-				<input type="button" name="" class="publishBtn" value="publier les changements">
-			</div>
-			<div class="divLogoNav">
-				<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-				<nav>
-					<ul>
-						<li>projets</li>
-						<li>contact</li>
-						<li><a href="./html/connexion.html">login</a></li>
-						<li><img src="./assets/icons/instagram.png" alt="Instagram" id="insta"></li>
-					</ul>
-				</nav>
-			</div>
+	<header class="divHeader">
+		<div class="divheadband" style="display:none">
+			<a href="#" class="headbandText">
+				<i class="fa-regular fa-pen-to-square"></i>
+				<p>Mode édition<p>
+			</a>
+			<input type="button" name="" class="publishBtn" value="publier les changements">
+		</div>
+		<div class="divLogoNav">
+			<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+			<nav>
+				<ul>
+					<li>projets</li>
+					<li>contact</li>
+					<li><a href="./html/connexion.html">login</a></li>
+					<li><img src="./assets/icons/instagram.png" alt="Instagram" id="insta"></li>
+				</ul>
+			</nav>
 		</div>
 	</header>
 
@@ -56,9 +54,11 @@
 				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale
 					du chantier.</p>
 				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs
-					dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans
+					dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré
+					dans
 					le souci du détail, le respect du planning et du budget.</p>
-				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
+				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)
+				</p>
 			</article>
 		</section>
 		<section id="portfolio">
@@ -98,7 +98,7 @@
 				<hr id="line1">
 				<input type="button" class="btn SelectedFilter" id="idAddPhotoBtn" value="Ajouter une photo">
 				<p id="idDeleteGallery">Supprimer la galerie</p>
-			
+
 				<!-- formulaire d'ajout de photo dans la modale-->
 				<form id="addPhotoForm" action="" method="post" style="display:none">
 					<div id="divBlue">
@@ -106,7 +106,7 @@
 							<i class="fa-regular fa-image"></i>
 							<label for="workAddPhotoInput" id="addPhotoBtn">+ Ajouter photo
 								<input type="file" id="workAddPhotoInput" placeholder="Ajouter photo" name="workAddPhotoInput"
-									accept="image/png, image/jpeg, image/jpg" >
+									accept="image/png, image/jpeg, image/jpg">
 							</label>
 							<p id="addPhotoMsg">jpg, png : 4mo max</p>
 						</div>

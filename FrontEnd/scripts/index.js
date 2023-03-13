@@ -97,13 +97,15 @@ export function showWhenConnected(worksFetched, categoriesFetched) {
       document.location.reload();
     })
   }
-
+  // Barre des filtres cachée
   if ((worksFetched !== []) && (categoriesFetched !== [])) {
+    console.log("in");
     const filters = document.getElementsByClassName("filters");
-    filters[0].classList.add("hidden");
+    filters[0].style.display = "none";
+    // Affichage du bandeau noir
     const headBand = document.getElementsByClassName("divheadband");
     headBand[0].style.display = null;
-    //remplissaale
+    //remplissage modale
     fillModal(worksFetched, categoriesFetched);
   }
   document.querySelectorAll(".js-modal").forEach(a => {
