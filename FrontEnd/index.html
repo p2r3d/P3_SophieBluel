@@ -108,15 +108,17 @@
 								<input type="file" id="workAddPhotoInput" placeholder="Ajouter photo" name="workAddPhotoInput"
 									accept="image/png, image/jpeg, image/jpg">
 							</label>
-							<p id="addPhotoMsg">jpg, png : 4mo max</p>
+							<p>jpg, png : 4mo max</p>
 						</div>
 						<div id="thumbnail">
 							<img id="miniPhoto" src="" style="display:none">
 						</div>
 					</div>
+					<p id="addPhotoMsg" style="display:none"></p>
 					<div id="divFormAddPhoto">
 						<label for="title">Titre</label>
-						<input type="text" name="title" id="idTitleAddPhoto" maxlength="30" required>
+						<input type="text" name="title" id="idTitleAddPhoto" maxlength="30">
+						<p id="addTitleMsg" style="display:none"></p>
 						<label for="photoCategories">Catégorie</label>
 						<select id="photoCategories" required></select>
 						<hr id="line2">

@@ -778,7 +778,11 @@ footer nav ul li {
 	font-weight: 400;
 	font-family: "Work Sans";
 }
-
+#addTitleMsg, #addPhotoMsg {
+	margin-top:5px;
+	color:#B1663C;
+	font-size: 1rem;
+}
 #divFormAddPhoto label {
 	margin: 2em 0 1em 0;
 	color: #3D3D3D;
@@ -789,7 +793,7 @@ footer nav ul li {
 #divFormAddPhoto input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
-	background-color: #1D6154;
+	background-color: #a7a7a7;
 	color: #FFFFFF;
 	width: 237px;
 	height: 36px;
@@ -797,16 +801,15 @@ footer nav ul li {
 	border-radius: 60px;
 	padding: 0 49px;
 	margin-bottom: 50px;
-	;
 }
 
-#divFormAddPhoto input[type="submit"]:hover {
+/*#divFormAddPhoto input[type="submit"]:hover {
 	background-color: #0E2F28;
-}
+}*/
 
 #addPhotoSubmitBtn {
 	margin: auto;
-	cursor: pointer;
+	/*cursor: pointer;*/
 }
 
 #miniPhoto {
@@ -856,5 +859,4 @@ select.photoCategories>option {
 	color: #444444;
 	background-color: #f2f2f2;
 	outline: none;
-	border: 1px solid green;
 }

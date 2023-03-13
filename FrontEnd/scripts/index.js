@@ -52,7 +52,7 @@ export function displayFilters(works, categories) {
 
   // ajout du bouton "Tous"
   const btnAll = createElement("button", ["btn", "SelectedFilter"]);
-  btnAll.setAttribute("id","IdBtnAll");
+  btnAll.setAttribute("id", "IdBtnAll");
   btnAll.innerText = "Tous";
   filtersContainer.appendChild(btnAll);
   btnAll.addEventListener("click", function () {
@@ -91,17 +91,16 @@ export function showWhenConnected(worksFetched, categoriesFetched) {
 
   if (sessionStorage.getItem("access_token") != null) {
     loginLi.innerText = "logout";
-    loginLi.style.cursor="pointer";
+    loginLi.style.cursor = "pointer";
     loginLi.addEventListener("click", function () {
       sessionStorage.clear();
       document.location.reload();
     })
   }
   // Barre des filtres cachée
-  if ((worksFetched !== []) && (categoriesFetched !== [])) {
-    console.log("in");
-    const filters = document.getElementsByClassName("filters");
-    filters[0].style.display = "none";
+ if ((worksFetched !== []) && (categoriesFetched !== [])) {
+   /*  const filters = document.getElementsByClassName("filters");
+    filters[0].style.display = "none";*/
     // Affichage du bandeau noir
     const headBand = document.getElementsByClassName("divheadband");
     headBand[0].style.display = null;
@@ -179,6 +178,8 @@ function fillModal(worksSent, categories) {
     document.querySelector(".idPhotosGallery").style.display = "";
     document.querySelector("#idAddPhotoBtn").style.display = "";
     document.querySelector("#idDeleteGallery").style.display = "";
+    document.querySelector("#addTitleMsg").style.display = "none";
+    document.querySelector("#addPhotoMsg").style.display = "none";
     document.querySelector("#modalTitle").innerText = "Galerie photos";
     back.addEventListener("click", returnBack);
     AddPhotoBtn.addEventListener("click", openAddPhotoForm);
@@ -186,14 +187,14 @@ function fillModal(worksSent, categories) {
 
   // affichage de la galerie de la modale
   displayThumbnailsGallery(worksSent);
-  
+
   // affichage de l'icône de déplacement sur la 1ère photo lorsque la galerie n'est pas vide !
   if (worksSent.length !== 0) {
     const card = document.querySelectorAll(".workCard");
     const movingImg = createElement("i", ["idDivMoving"]);
     movingImg.classList.add("fa-solid", "fa-arrows-up-down-left-right");
     card[0].appendChild(movingImg);
-  } 
+  }
 
   // bouton ouvrant le formulaire "ajout de photos"
   const AddPhotoBtn = document.querySelector("#idAddPhotoBtn");
@@ -210,17 +211,17 @@ function fillModal(worksSent, categories) {
     document.querySelector("#miniPhoto").style.display = null;
     document.querySelector("#miniPhoto").src = "";
     document.querySelector("#workAddPhotoInput").innerHTML = "";
-    document.querySelector("#addPhotoMsg").innerText = "jpg, png : 4mo max";
-    document.querySelector("#addPhotoMsg").style.color = "";
     document.querySelector("#thumbnail").src = "";
     document.querySelector("#modalTitle").innerText = "Ajout photo";
     document.querySelector(".idPhotosGallery").style.display = "none";
     document.querySelector("#idAddPhotoBtn").style.display = "none";
     document.querySelector("#idDeleteGallery").style.display = "none";
     document.querySelector("#addPhotoForm").style.display = null;
+    document.querySelector("#addPhotoSubmitBtn").style.backgroundColor = "#a7a7a7";
     document.querySelector("#idBack").style.display = null;
     document.querySelector("#divIcones").style.justifyContent = "space-between";
     document.getElementById("line1").style.display = "none";
+    document.querySelector("#addTitleMsg").style.display = "none";
 
     //  chargement du thumbnail
     const loadPhotoBtn = document.getElementById("workAddPhotoInput");
@@ -231,27 +232,30 @@ function fillModal(worksSent, categories) {
       file = e.target.files[0];
       document.querySelector("#addPhotoMsg").innerText = "jpg, png : 4mo max";
       document.querySelector("#addPhotoMsg").style.color = "";
-      if (file.size <= 2 * 1024 * 1024) {
+      if (file.size <= 4 * 1024 * 1024) {
         document.querySelector("#thumbnail").style.display = "";
         const inputPhoto = document.getElementById("miniPhoto");
         inputPhoto.style.display = "";
         inputPhoto.src = URL.createObjectURL(file);
-
         const divImportPhoto = document.querySelector("#divImportPhoto");
         divImportPhoto.style.display = "none";
+        document.querySelector("#addPhotoMsg").style.display = "none";
+        const inputPhotoBtn = document.querySelector("#workAddPhotoInput");
+        if (inputPhotoBtn.files[0] !== undefined && (idTitleAddPhoto.value.length !== 0 || idTitleAddPhoto.value.trim() !== '')) {
+          document.querySelector("#addPhotoSubmitBtn").style.backgroundColor = "#1D6154";
+        } 
         loadPhotoBtn.removeEventListener("change", loadPhotoFile);
         loadPhotoBtn.addEventListener("change", loadPhotoFile);
       } else {
         console.log('Le fichier est supérieur à 4 Mo');
-        file=null;
+        file = null;
         loadPhotoBtn.removeEventListener("change", loadPhotoFile);
         loadPhotoBtn.addEventListener("change", loadPhotoFile);
-        document.querySelector("#addPhotoMsg").innerText="la taille du fichier doit être inférieure à 4 Mo";
-        document.querySelector("#addPhotoMsg").style.color="red";
-      } 
+      }
     }
     AddPhotoBtn.addEventListener("click", openAddPhotoForm);
   }
+
   // remplissage de la liste déroulante des catégories
   const selectCategories = document.querySelector("#photoCategories");
   for (let category of categories) {
@@ -261,37 +265,57 @@ function fillModal(worksSent, categories) {
     selectCategories.appendChild(catOption);
   }
   // validation du formulaire
+  // affichage vert du bouton de validation 
+  const idTitleAddPhoto = document.querySelector("#idTitleAddPhoto");
+  idTitleAddPhoto.addEventListener('input', function (event) {
+    event.preventDefault();
+    // Vérifie si la photo est ajoutée
+    const inputPhotoBtn = document.querySelector("#workAddPhotoInput");
+    if (inputPhotoBtn.files[0] !== undefined 
+      && (idTitleAddPhoto.value.length !== 0 || idTitleAddPhoto.value.trim() !== '')) {
+      document.querySelector("#addPhotoSubmitBtn").style.backgroundColor = "#1D6154";
+      } 
+    idTitleAddPhoto.removeEventListener('input', function (event){});
+  });
   const addPhotoForm = document.querySelector("#addPhotoForm");
   addPhotoForm.addEventListener('submit', function (e) {
     e.preventDefault();
     const inputPhotoBtn = document.querySelector("#workAddPhotoInput");
     if (inputPhotoBtn.files[0] === undefined) {
-      console.log("undefined");
-      document.querySelector("#addPhotoMsg").innerText = "Une photo doit être ajoutée svp";
-      document.querySelector("#addPhotoMsg").style.color = "red"
+      document.querySelector("#addPhotoMsg").style.display = null;
+      document.querySelector("#addPhotoMsg").innerText = 'Veuillez ajouter une photo svp';
       return;
     }
-    FetchAddWork(worksSent, categories);
-    addPhotoForm.removeEventListener('submit', function (e) { })
-    addPhotoForm.addEventListener('submit', function (e) { })
-  })
-
-  // suppression de la galerie
-  const deleteGallery = document.querySelector("#idDeleteGallery");
-  deleteGallery.addEventListener("click", function (e) {
-    e.preventDefault();
-    if (confirm("Voulez-vous vraiment supprimer l'ensemble de la galerie?")) {
-      for (let j in worksSent) {
-        fetchDeleteWork(parseInt(worksSent[j].id));
-      }
-      worksSent = [];
-      document.querySelector("#modalTitle").innerText = "La galerie est vide";
-      updateWorks();
-      document.querySelector(".gallery").innerHTML = "";
-      document.querySelector("#idDeleteGallery").style.display = "none";
-      document.querySelector(".filters").style.display = "none";    
+    const idTitleAddPhoto = document.querySelector("#idTitleAddPhoto");
+    if (idTitleAddPhoto.value.length === 0 || idTitleAddPhoto.value.trim() === '') {
+      document.querySelector("#addTitleMsg").style.display = null;
+      document.querySelector("#addTitleMsg").innerText = 'Veuillez renseigner le titre svp';
+      idTitleAddPhoto.focus();
+      return;
     }
-  })
+
+  // Ajout dans l'api
+  FetchAddWork(worksSent, categories);
+  addPhotoForm.removeEventListener('submit', function (e) { })
+  addPhotoForm.addEventListener('submit', function (e) { })
+})
+
+// suppression de la galerie
+const deleteGallery = document.querySelector("#idDeleteGallery");
+deleteGallery.addEventListener("click", function (e) {
+  e.preventDefault();
+  if (confirm("Voulez-vous vraiment supprimer l'ensemble de la galerie?")) {
+    for (let j in worksSent) {
+      fetchDeleteWork(parseInt(worksSent[j].id));
+    }
+    worksSent = [];
+    document.querySelector("#modalTitle").innerText = 'La galerie est vide';
+    updateWorks();
+    document.querySelector(".gallery").innerHTML = "";
+    document.querySelector("#idDeleteGallery").style.display = "none";
+    document.querySelector(".filters").style.display = "none";
+  }
+})
 }
 // mise à jour de l'ajout ou de la suppression de travaux
 export function updateWorks(worksSent) {
