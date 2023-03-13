@@ -12,8 +12,7 @@ function createElement(tagName, classes = []) {
 // AFFICHAGE DE LA GALERIE
 export function displayGallery(worksSent) {
   document.querySelector(".gallery").innerHTML = "";
-  const categoriesNames = new Set();
-
+ 
   // récup des catégories dans l'objet Set
   for (let i in worksSent) {
     let workSenti = worksSent[i];
@@ -30,9 +29,6 @@ export function displayGallery(worksSent) {
     const workTitle = createElement("figcaption", ["cardfigcaption"]);
     workCard.appendChild(workTitle);
     workTitle.innerText = workSenti.title;
-
-    // récup de la catégorie pour l'affichage ultérieur des filtres
-    categoriesNames.add(workSenti.category.name);
   }
 }
 
