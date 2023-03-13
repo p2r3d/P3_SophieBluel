@@ -12,12 +12,15 @@ form.addEventListener("submit", async function (event) {
   // test de la validité de l'email ainsi que les éventuelles espaces
   var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (!reg.test(String(userLogin).toLowerCase())) {
-    console.log(userLogin);
-    msg.innerText = "Adresse email incorrecte";
+    msg.innerText = 'Adresse email incorrecte';
     return;
   }
   // récup password
   const userPwd = document.getElementById("idPwd").value;
+  if (userPwd.length === 0 || userPwd.trim()==="") {
+    msg.innerText = 'Mot de passe incorrect';
+    return;
+  }
 
   // on constitue l'objet à envoyer dans le body de la requête
   const user = { "email": userLogin, "password": userPwd };
@@ -34,18 +37,15 @@ form.addEventListener("submit", async function (event) {
     .then((response) => {
       if (!response.ok) {
         // test sur combinaison email/password
-        if (response.status === 401) {
-          msg.innerText = "Erreur dans l'identifiant ou le mot de passe";
-        }
-        // affichage message d'erreur 
-        if (msg.innerText == "") {
-          msg.innerText = "Erreur lors de la requête";
+        if (response.status === 401 || msg.innerText == "") {
+          msg.innerText = "Erreur dans l'identifiant et/ou le mot de passe";
         }
         throw new Error("Erreur lors de la requête serveur");
       }
       return response.json();
     })
-    // le token est stocké dans le sessionStorage puis on redirige vers la page d'accueil
+    // le token est stocké dans le sessionStorage 
+    // puis on redirige vers la page d'accueil
     .then((data) => {
       sessionStorage.setItem("access_token", data.token);
       window.location.href = '../index.html';
