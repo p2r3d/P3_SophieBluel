@@ -2,7 +2,6 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
 html,
 body,
 div,
@@ -91,7 +90,6 @@ video {
 	font: inherit;
 	vertical-align: baseline;
 }
-
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -106,21 +104,17 @@ nav,
 section {
 	display: block;
 }
-
 body {
 	line-height: 1;
 }
-
 ol,
 ul {
 	list-style: none;
 }
-
 blockquote,
 q {
 	quotes: none;
 }
-
 blockquote:before,
 blockquote:after,
 q:before,
@@ -128,12 +122,10 @@ q:after {
 	content: '';
 	content: none;
 }
-
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
 /** end reset css**/
 html {
 	font-size: 14px;
@@ -141,7 +133,6 @@ html {
 * {
 	box-sizing: border-box;
 }
-
 body {
 	max-width: 1440px;
 	margin: auto;
@@ -149,17 +140,14 @@ body {
 	font-size: 14px;
 	background-color: #FFFEF8;
 }
-
 a {
 	text-decoration: none;
 	color: inherit;
 }
-
 header {
 	display: flex;
 	justify-content: space-between;
 }
-
 .divHeader {
 	width: 100%;
 	display: flex;
@@ -167,7 +155,6 @@ header {
 	align-items: center;
 	flex-wrap:wrap;
 }
-
 .divheadband {
 	display: flex;
 	align-items: center;
@@ -177,7 +164,6 @@ header {
 	gap: 0.5rem;
 	width:100%;
 }
-
 .divLogoNav {
 	display: flex;
 	flex-direction: row;
@@ -187,13 +173,11 @@ header {
 	padding-top: 3rem;
 	width: 80%;
 }
-
 .headbandText {
 	display: flex;
 	gap: 10px;
-	color: white;
+	color: #FFFFFF;
 }
-
 .publishBtn {
 	border-radius: 60px;
 	background-color: #FFFFFF;
@@ -202,13 +186,10 @@ header {
 	margin-left: 20px;
 	font-family: 'Syne';
 	font-size: 14px;
-	/*cursor:pointer;*/
 }
-
 section {
 	margin: 50px 0;
 }
-
 h1 {
 	display: flex;
 	flex-direction: column;
@@ -217,43 +198,35 @@ h1 {
 	font-weight: 800;
 	color: #B1663C
 }
-
 h1>span {
 	font-family: 'Work Sans';
 	font-size: 10px;
 	letter-spacing: 0.1em;
-	;
 }
-
 h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
 }
-
 nav ul {
 	display: flex;
 	list-style-type: none;
 	flex-wrap:wrap;
 	gap :2rem;
 }
-
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 	font-weight: 400;
 }
-
 li:hover {
 	color: #B1663C;
 }
-
 #insta {
 	width: 1.4rem;
 	height: 1.4rem;
 }
-
 #introduction {
 	display: grid;
 	margin: 6rem auto;
@@ -262,34 +235,27 @@ li:hover {
 	align-items: center;
 	width:66%;
 }
-
 #introduction figure {
 	flex: 1;
 }
-
 #introduction img {
 	display: block;
 	width: 100%;
-	max-width:474px;
-	/*height: auto;*/
+	max-width:33.8rem;
 }
-
 #introduction article {
 	flex: 1;
 	margin-right: 2rem;
 }
-
 #introduction h2 {
 	margin-bottom: 1em;
 }
-
 #introduction p {
 	margin-bottom: 1em;
 	color: #3D3D3D;
 	font-family: 'Work Sans';
 	font-weight: 400;
 }
-
 #divModifyLink {
 	display: flex;
 	flex-direction: row;
@@ -297,7 +263,6 @@ li:hover {
 	align-items: center;
 	width: 100%;
 }
-
 .divProjectTitle {
 	display: flex;
 	flex-direction: row;
@@ -305,16 +270,13 @@ li:hover {
 	align-items: center;
 	gap: 2rem;
 }
-
 .fa-regular {
 	font-size: 1rem;
 }
-
 #portfolio {
 	margin: 0px auto;
 	width:66%;
 }
-
 #portfolio h2 {
 	text-align: center;
 }
@@ -335,7 +297,6 @@ li:hover {
 	justify-content: center;
 	align-content: center;
 }
-
 .gallery figure {
 	display: flex;
 	flex-direction: column;
@@ -346,7 +307,6 @@ li:hover {
 	height:100%;
 	object-fit:cover;
 }
-
 .cardfigcaption {
 	color: #3D3D3D;
 	font-size: 13px;
@@ -355,12 +315,10 @@ li:hover {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-
 .card img {
 	width: 100%;
 	object-fit: cover;
 }
-
 /* FILTRES */
 .filters {
 	display: flex;
@@ -372,7 +330,6 @@ li:hover {
 	margin-bottom: 3.5rem;
 	gap: 1rem;
 }
-
 .btn {
 	border-radius: 60px;
 	background-color: #FFFEF8;
@@ -383,45 +340,37 @@ li:hover {
 	font-family: 'Syne';
 	font-size: 1.1rem;
 }
-
 .btn:hover {
 	background-color: #1D6154;
 	color: #FFFFFF;
 }
-
 .SelectedFilter {
 	background-color: #1D6154;
 	color: #FFFFFF;
 }
-
 /* FORMULAIRE DE CONTACT */
 #contact {
 	padding-top:2rem;
 	width: 25%;
 	margin: auto;
 }
-
 #contact>* {
 	text-align: center;
 }
-
 #contact h2 {
 	margin-bottom: 1rem;
 }
-
 #contact p {
 	color: #3D3D3D;
 	font-size: 1.1rem;
 	font-weight: 400;
 }
-
 #contact form {
 	text-align: left;
 	margin-top: 1rem;
 	display: flex;
 	flex-direction: column;
 }
-
 #contact input {
 	height: 3.6rem;
 	font-size: 1rem;
@@ -429,20 +378,17 @@ li:hover {
 	box-shadow: 0px 4px 1rem rgba(0, 0, 0, 0.09);
 	outline: none;
 }
-
 #contact label {
 	margin: 2em 0 1em 0;
 	color: #3D3D3D;
 	font-weight: 500;
 }
-
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	resize: none;
 	outline: none;
 }
-
 #contact input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
@@ -454,7 +400,6 @@ li:hover {
 	text-align: center;
 	border-radius: 4rem;
 }
-
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
@@ -463,14 +408,12 @@ footer nav ul {
 	height: 4rem;
 	font-size: 1em;
 }
-
 footer nav ul li {
 	font-family: 'Work Sans';
 	font-size: 1em;
 	font-weight: 300;
 	padding: 2rem 7rem 1.5rem;
 }
-
 /* PAGE DE CONNEXION */
 #divLogoNav {
 	display: flex;
@@ -481,24 +424,20 @@ footer nav ul li {
 	padding-top: 3.5rem;
 	width: 100%;
 }
-
 #idLoginLi {
 	font-weight: 700;
 	cursor:pointer;
 }
-
 #login {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 }
-
 #loginTitle {
 	text-align: center;
 	padding-top: 10.7rem;
 	padding-bottom: 2.8rem;
 }
-
 .divForm {
 	display: flex;
 	flex-direction: column;
@@ -508,14 +447,12 @@ footer nav ul li {
 	text-align: left;
 	color: #3D3D3D;
 }
-
 .divFormElements {
 	display: flex;
 	flex-direction: column;
 	gap: 0.7rem;
 	width: 34%;
 }
-
 #idEmail,
 #idPwd {
 	height: 3.6rem;
@@ -524,7 +461,6 @@ footer nav ul li {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	outline: none;
 }
-
 /* bouton envoyer*/
 #idSubmit {
 	font-family: 'Syne';
@@ -539,31 +475,26 @@ footer nav ul li {
 	padding: 0 2.8rem;
 	cursor: pointer;
 }
-
 #idSubmit:hover {
 	background-color: #0E2F28;
 }
-
 /* lien mot de passe oublié*/
 #idForgottenPwd {
 	text-align: center;
 	color: inherit;
 	text-decoration: underline;
 }
-
 /* éventuel message erreur authentification*/
 #idErrorMsg {
 	color: #B1663C;
 	font-size: 1.6rem;
 	font-weight: 600;
 }
-
 /* --------------partie Modale-------------- */
 .js-modal {
 	gap: 0.4rem;
 	margin: 0.7rem 0;
 }
-
 .modal {
 	display: flex;
 	align-items: center;
@@ -575,7 +506,6 @@ footer nav ul li {
 	width: 100%;
 	background: rgba(0, 0, 0, 0.8);
 }
-
 .divModal {
 	display: flex;
 	flex-direction: column;
@@ -586,30 +516,24 @@ footer nav ul li {
 	max-width: calc(150vw - 20px);
 	max-height: calc(100vh - 20px);
 	padding: 0 7rem;
-
 }
-
 .divModal p {
 	font-size: 1.8rem;
 	text-align: center;
 	padding: 0 0 3.3rem 0;
 }
-
 .workCard {
 	position: relative;
 }
-
 #idTitleModal {
 	text-align: center;
 	font-size: 1.8rem;
 }
-
 #line1 {
 	border: 1px solid #B3B3B3;
 	margin-top: 3.6rem;
 	width:100%;
 }
-
 #idAddPhotoBtn {
 	width: 50%;
 	width: fit-content;
@@ -623,11 +547,9 @@ footer nav ul li {
 	font-family: "Syne";
 	cursor: pointer;
 }
-
 #idAddPhotoBtn:hover {
 	background-color: #0E2F28;
 }
-
 #divIcones {
 	display: flex;
 	justify-content: space-between;
@@ -637,17 +559,14 @@ footer nav ul li {
 	position: relative;
 	left: -100px;
 }
-
 #divIcones i {
 	cursor: pointer;
 }
-
 #idBack,
 #idClose {
 	font-size: 1.5rem;
 	cursor: pointer;
 }
-
 #idDeleteGallery {
 	text-align: right;
 	width: fit-content;
@@ -658,7 +577,6 @@ footer nav ul li {
 	font-size: 1rem;
 	cursor: pointer;
 }
-
 .idPhotosGallery {
 	width: 100%;
 	display: grid;
@@ -668,17 +586,14 @@ footer nav ul li {
 	grid-row-gap: 1.4rem;
 	color: inherit;
 }
-
 .idPhotosGallery img {
 	width: 100%;
 	height:100%;
 	object-fit:cover;
 }
-
 .idPhotosGallery figcaption {
 	color: #0000
 }
-
 .idDivTrash {
 	position: absolute;
 	top: 0;
@@ -692,7 +607,6 @@ footer nav ul li {
 	height: fit-content;
 	cursor: pointer;
 }
-
 .fa-solid.fa-arrows-up-down-left-right,
 .fa-solid.fa-trash-can {
 
@@ -702,7 +616,6 @@ footer nav ul li {
 	border-radius: 5px;
 
 }
-
 .idDivMoving {
 	position: absolute;
 	top: 0;
@@ -715,40 +628,33 @@ footer nav ul li {
 	width: fit-content;
 	height: fit-content;
 }
-
 /* --------------Formulaire ajout de photo-------------- */
 #addPhotoForm {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
-
 #divBlue {
 	width: 30rem;
 	background-color: #E8F1F6;
 }
-
 #divImportPhoto {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
-
 #divImportPhoto p {
 	font-size: 0.7rem;
 	padding: 0.5rem 0 1.5rem 0;
 }
-
 #divImportPhoto i {
 	padding: 1.8rem 0 1.5rem;
 	font-size: 4.3rem;
 	opacity: 0.2;
 }
-
 #addPhotoBtn input[type="file"] {
 	display: none;
 }
-
 #addPhotoBtn {
 	display: flex;
 	justify-content: center;
@@ -761,13 +667,11 @@ footer nav ul li {
 	border-radius: 20px;
 	cursor: pointer;
 }
-
 #divFormAddPhoto {
 	display: flex;
 	flex-direction: column;
 	width: 30rem;
 }
-
 #divFormAddPhoto input {
 	display: flex;
 	height: 3.6rem;
@@ -790,7 +694,6 @@ footer nav ul li {
 	font-weight: 500;
 	font-family: "Work Sans";
 }
-
 #divFormAddPhoto input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
@@ -803,21 +706,17 @@ footer nav ul li {
 	padding: 0 3.5rem;
 	margin-bottom: 3.6rem;
 }
-
 /*#divFormAddPhoto input[type="submit"]:hover {
 	background-color: #0E2F28;
 }*/
-
 #addPhotoSubmitBtn {
 	margin: auto;
 }
-
 #miniPhoto {
 	width: 100%;
 	height: 11.4rem;
 	object-fit: contain;
 }
-
 #photoCategories {
 	font-family: 'Work Sans';
 	color: #444444;
@@ -830,7 +729,6 @@ footer nav ul li {
 	padding-left: 1.1rem;
 	outline: none;
 }
-
 .photoCategory {
 	font-family: 'Work Sans';
 	color: #444444;
@@ -843,13 +741,11 @@ footer nav ul li {
 	padding-left: 1.1rem;
 	outline: none;
 }
-
 #line2 {
 	border: 1px solid #B3B3B3;
 	margin: 3.3rem 0;
 	width: 100%;
 }
-
 /* pour l'affichage sous firefox, sinon fonctionne sur chrome*/
 select.photoCategories>option {
 	font-weight: 400;

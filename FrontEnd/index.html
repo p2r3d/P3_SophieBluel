@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
@@ -11,21 +10,20 @@
 		rel="stylesheet">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="https://kit.fontawesome.com/b4aa609cc9.js" crossorigin="anonymous"></script>
-	<script type="module" src="./scripts/store.js" defer></script>
-	<script type="module" src="./scripts/main.js" defer></script>
-	<script type="module" src="./scripts/index.js" defer></script>
+	<script type="module" src="./scripts/store.js" ></script>
+	<script type="module" src="./scripts/main.js" ></script>
+	<script type="module" src="./scripts/index.js" ></script>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
-
 <body>
 	<header class="divHeader">
 		<div class="divheadband" style="display:none">
 			<a href="#" class="headbandText">
 				<i class="fa-regular fa-pen-to-square"></i>
-				<p>Mode édition<p>
+				<p>Mode édition</p>
 			</a>
-			<input type="button" name="" class="publishBtn" value="publier les changements">
+			<input type="button" name="publishBtn" class="publishBtn" value="publier les changements">
 		</div>
 		<div class="divLogoNav">
 			<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
@@ -41,6 +39,7 @@
 	</header>
 	<main>
 		<section id="introduction">
+			<h2 style="display:none">Introduction</h2>
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
 				<div id="divModifyLink">
@@ -82,7 +81,7 @@
 				<input type="submit" value="Envoyer" id="contact-submit">
 			</form>
 		</section>
-		<aside class="modal" id="modal1" style="display:none" role="dialog" aria-hidden="true">
+		<aside class="modal" id="modal1" style="display:none" aria-hidden="true">
 			<div class="divModal js-modal-stop">
 				<!-- galerie de photos dans la modale-->
 				<div id="divIcones">
@@ -95,29 +94,28 @@
 				<hr id="line1">
 				<input type="button" class="btn SelectedFilter" id="idAddPhotoBtn" value="Ajouter une photo">
 				<p id="idDeleteGallery">Supprimer la galerie</p>
-
 				<!-- formulaire d'ajout de photo dans la modale-->
-				<form id="addPhotoForm" action="" method="post" style="display:none">
+				<form id="addPhotoForm" method="post" style="display:none">
 					<div id="divBlue">
 						<div id="divImportPhoto">
 							<i class="fa-regular fa-image"></i>
 							<label for="workAddPhotoInput" id="addPhotoBtn">+ Ajouter photo
-								<input type="file" id="workAddPhotoInput" placeholder="Ajouter photo" name="workAddPhotoInput"
+								<input type="file" id="workAddPhotoInput" name="workAddPhotoInput"
 									accept="image/png, image/jpeg, image/jpg">
 							</label>
 							<p>jpg, png : 4mo max</p>
 						</div>
 						<div id="thumbnail">
-							<img id="miniPhoto" src="" style="display:none">
+							<img id="miniPhoto" src="#" alt="photo" style="display:none">
 						</div>
 					</div>
 					<p id="addPhotoMsg" style="display:none"></p>
 					<div id="divFormAddPhoto">
-						<label for="title">Titre</label>
+						<label for="idTitleAddPhoto">Titre</label>
 						<input type="text" name="title" id="idTitleAddPhoto" maxlength="30">
 						<p id="addTitleMsg" style="display:none"></p>
 						<label for="photoCategories">Catégorie</label>
-						<select id="photoCategories" required></select>
+						<select id="photoCategories"></select>
 						<hr id="line2">
 						<input type="submit" id="addPhotoSubmitBtn" value="Valider">
 					</div>
@@ -125,7 +123,6 @@
 			</div>
 		</aside>
 	</main>
-
 	<footer>
 		<nav>
 			<ul>
@@ -134,5 +131,4 @@
 		</nav>
 	</footer>
 </body>
-
 </html>
