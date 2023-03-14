@@ -12,12 +12,10 @@ function createElement(tagName, classes = []) {
 // AFFICHAGE DE LA GALERIE
 export function displayGallery(worksSent) {
   document.querySelector(".gallery").innerHTML = "";
- 
-  // récup des catégories dans l'objet Set
+  // parcours des travaux récupérés dans l'API et création des cartes associées
   for (let i in worksSent) {
     let workSenti = worksSent[i];
     const workCard = createElement("figure");
-    document.querySelector(".gallery").appendChild(workCard);
 
     // affichage de l'image
     const workImg = createElement("img", ["cardImg"]);
@@ -29,17 +27,19 @@ export function displayGallery(worksSent) {
     const workTitle = createElement("figcaption", ["cardfigcaption"]);
     workCard.appendChild(workTitle);
     workTitle.innerText = workSenti.title;
+
+    // ajout de l'élément workcard à l'élément parent gallery
+    document.querySelector(".gallery").appendChild(workCard);
   }
 }
 
 
 // AFFICHAGE DES FILTRES
 export function displayFilters(works, categories) {
+  // réinitialisation des boutons de filtres
   document.querySelector(".btn").innerHTML = "";
-
-  const portfolio = document.getElementById("portfolio");
-
   // conteneur filtres rattaché au portfolio
+  const portfolio = document.getElementById("portfolio");
   const filtersContainer = createElement("div", ["filters"]);
   const ngallery = document.getElementsByClassName("gallery")[0];
   portfolio.insertBefore(filtersContainer, ngallery);
@@ -60,6 +60,7 @@ export function displayFilters(works, categories) {
     catButton.innerText = categoryName.name;
     filtersContainer.appendChild(catButton);
 
+    // événement d'écoute sur chacun des boutons filtres
     catButton.addEventListener("click", function () {
       const FilteredWorks = works.filter(work => work.category.name == categoryName.name);
       displayGallery(FilteredWorks);
@@ -169,12 +170,13 @@ function fillModal(worksSent, categories) {
     document.querySelector("#idBack").style.display = "none";
     document.querySelector("#divIcones").style.justifyContent = "right";
     document.querySelector("#addPhotoForm").style.display = "none";
-    document.querySelector(".idPhotosGallery").style.display = "";
-    document.querySelector("#idAddPhotoBtn").style.display = "";
-    document.querySelector("#idDeleteGallery").style.display = "";
+    document.querySelector(".idPhotosGallery").style.display = null;
+    document.querySelector("#idAddPhotoBtn").style.display = null;
+    document.querySelector("#idDeleteGallery").style.display = null;
     document.querySelector("#addTitleMsg").style.display = "none";
     document.querySelector("#addPhotoMsg").style.display = "none";
     document.querySelector("#modalTitle").innerText = "Galerie photos";
+    document.getElementById("line1").style.display = null;
     back.addEventListener("click", returnBack);
     AddPhotoBtn.addEventListener("click", openAddPhotoForm);
   }
@@ -227,7 +229,7 @@ function fillModal(worksSent, categories) {
       document.querySelector("#addPhotoMsg").innerText = "jpg, png : 4mo max";
       document.querySelector("#addPhotoMsg").style.color = "";
       if (file.size <= 4 * 1024 * 1024) {
-        document.querySelector("#thumbnail").style.display = "";
+        document.querySelector("#thumbnail").style.display = null;
         const inputPhoto = document.getElementById("miniPhoto");
         inputPhoto.style.display = "";
         inputPhoto.src = URL.createObjectURL(file);

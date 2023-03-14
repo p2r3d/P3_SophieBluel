@@ -41,7 +41,7 @@ export async function FetchAddWork(works, cat) {
     formData.append("category", parseInt(optId));
 
     // envoi d'une demande au serveur
-    fetch(`http://localhost:5678/api/works`, {
+    await fetch(`http://localhost:5678/api/works`, {
       method: 'POST',
       headers: {
         "Authorization": `Bearer ${token}`,
