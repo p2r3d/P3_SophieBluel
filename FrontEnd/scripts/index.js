@@ -83,7 +83,6 @@ export function showWhenConnected(worksFetched, categoriesFetched) {
   // Affichage de l'état de l'authentification (login/logout) dans la barre de navigation
   const listeLi = document.querySelector("ul");
   const loginLi = listeLi.querySelectorAll("li")[2];
-
   if (sessionStorage.getItem("access_token") != null) {
     loginLi.innerText = "logout";
     loginLi.style.cursor = "pointer";
@@ -102,6 +101,7 @@ export function showWhenConnected(worksFetched, categoriesFetched) {
     //remplissage modale
     fillModal(worksFetched, categoriesFetched);
   }
+  // Ecoute sur liens vers l'ouverture de la modale
   document.querySelectorAll(".js-modal").forEach(a => {
     a.style.display = null;
     a.removeEventListener("click", openModal);
@@ -153,7 +153,6 @@ function displayThumbnailsGallery(worksSent) {
 
 function fillModal(worksSent, categories) {
   document.querySelector(".idPhotosGallery").innerHTML = "";
-
   // titre de la modale
   document.querySelector("#modalTitle").innerText = "Galerie photos";
 
@@ -180,7 +179,6 @@ function fillModal(worksSent, categories) {
     back.addEventListener("click", returnBack);
     AddPhotoBtn.addEventListener("click", openAddPhotoForm);
   }
-
   // affichage de la galerie de la modale
   displayThumbnailsGallery(worksSent);
 
@@ -228,6 +226,7 @@ function fillModal(worksSent, categories) {
       file = e.target.files[0];
       document.querySelector("#addPhotoMsg").innerText = "jpg, png : 4mo max";
       document.querySelector("#addPhotoMsg").style.color = "";
+      // vérification de la taille de la photo
       if (file.size <= 4 * 1024 * 1024) {
         document.querySelector("#thumbnail").style.display = null;
         const inputPhoto = document.getElementById("miniPhoto");
@@ -236,8 +235,10 @@ function fillModal(worksSent, categories) {
         const divImportPhoto = document.querySelector("#divImportPhoto");
         divImportPhoto.style.display = "none";
         document.querySelector("#addPhotoMsg").style.display = "none";
+        // couleur verte du bouton de validation
         const inputPhotoBtn = document.querySelector("#workAddPhotoInput");
-        if (inputPhotoBtn.files[0] !== undefined && (idTitleAddPhoto.value.length !== 0 || idTitleAddPhoto.value.trim() !== '')) {
+        if (inputPhotoBtn.files[0] !== undefined 
+          && (idTitleAddPhoto.value.length !== 0 || idTitleAddPhoto.value.trim() !== '')) {
           document.querySelector("#addPhotoSubmitBtn").style.backgroundColor = "#1D6154";
         } 
         loadPhotoBtn.removeEventListener("change", loadPhotoFile);
@@ -261,12 +262,10 @@ function fillModal(worksSent, categories) {
     selectCategories.appendChild(catOption);
   }
 
-  // validation du formulaire
-  // affichage vert du bouton de validation 
+  // couleur du bouton de validation
   const idTitleAddPhoto = document.querySelector("#idTitleAddPhoto");
-  idTitleAddPhoto.addEventListener('input', function (event) {
+  idTitleAddPhoto.addEventListener("input", function (event) {
     event.preventDefault();
-    // Vérifie si la photo est ajoutée
     const inputPhotoBtn = document.querySelector("#workAddPhotoInput");
     if (inputPhotoBtn.files[0] !== undefined 
       && (idTitleAddPhoto.value.length !== 0 || idTitleAddPhoto.value.trim() !== '')) {
@@ -274,15 +273,19 @@ function fillModal(worksSent, categories) {
       } 
     idTitleAddPhoto.removeEventListener('input', function (event){});
   });
+
+   // validation du formulaire d'ajout de photo
   const addPhotoForm = document.querySelector("#addPhotoForm");
-  addPhotoForm.addEventListener('submit', function (e) {
+  addPhotoForm.addEventListener("submit", function (e) {
     e.preventDefault();
+    // Vérifie si la photo est ajoutée
     const inputPhotoBtn = document.querySelector("#workAddPhotoInput");
     if (inputPhotoBtn.files[0] === undefined) {
       document.querySelector("#addPhotoMsg").style.display = null;
       document.querySelector("#addPhotoMsg").innerText = 'Veuillez ajouter une photo svp';
       return;
     }
+    // Vérifie si le titre est ajouté
     const idTitleAddPhoto = document.querySelector("#idTitleAddPhoto");
     if (idTitleAddPhoto.value.length === 0 || idTitleAddPhoto.value.trim() === '') {
       document.querySelector("#addTitleMsg").style.display = null;
@@ -291,7 +294,7 @@ function fillModal(worksSent, categories) {
       return;
     }
 
-  // Ajout dans l'api
+  // Appel à l'api
   FetchAddWork(worksSent, categories);
   addPhotoForm.removeEventListener('submit', function (e) { })
   addPhotoForm.addEventListener('submit', function (e) { })
