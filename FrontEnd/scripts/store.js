@@ -52,8 +52,7 @@ export async function FetchAddWork(works, cat) {
         if (!response.ok) {
           throw new Error("Erreur lors de la requête serveur");
         }
-        const data = response.json();
-        return data;
+        return response.json();
       })
       .then(data => {
         // ajout de l'identifiant de la catégorie dans le nouveau projet

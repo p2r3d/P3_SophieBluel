@@ -4,24 +4,24 @@ const form = document.querySelector("form");
 form.addEventListener("submit", async function (event) {
   event.preventDefault();
 
-  // récup email
-  const userLogin = document.getElementById("idEmail").value;
   // test de l'email
-  const msg = document.getElementById('idErrorMsg');
+  const msg = document.getElementById("idErrorMsg");
   msg.innerText = "";
-  // test de la validité de l'email ainsi que les éventuelles espaces
-  var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const userLogin = document.getElementById("idEmail").value.trim();
+  if (userLogin.length === 0){
+    msg.innerText = "L'adresse email est requise";
+  }
+  const reg = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
   if (!reg.test(String(userLogin).toLowerCase())) {
-    msg.innerText = 'Adresse email incorrecte';
+    msg.innerText = "L'adresse email est incorrecte";
     return;
   }
-  // récup password
-  const userPwd = document.getElementById("idPwd").value;
-  if (userPwd.length === 0 || userPwd.trim()==="") {
-    msg.innerText = 'Mot de passe incorrect';
+  // test du mot de passe
+  const userPwd = document.getElementById("idPwd").value.trim();
+  if (userPwd.length === 0) {
+    msg.innerText = 'Le mot de passe est incorrect';
     return;
   }
-
   // on constitue l'objet à envoyer dans le body de la requête
   const user = { "email": userLogin, "password": userPwd };
 
@@ -36,10 +36,6 @@ form.addEventListener("submit", async function (event) {
   })
     .then((response) => {
       if (!response.ok) {
-        // test sur combinaison email/password
-        if (response.status === 401 || msg.innerText == "") {
-          msg.innerText = "Erreur dans l'identifiant et/ou le mot de passe";
-        }
         throw new Error("Erreur lors de la requête serveur");
       }
       return response.json();
@@ -52,6 +48,8 @@ form.addEventListener("submit", async function (event) {
     })
     .catch((error) => {
       console.error(error.message);
+      msg.innerText = "Erreur lors de la requête serveur";
+
     })
 });
 
