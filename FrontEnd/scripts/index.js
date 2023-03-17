@@ -1,4 +1,4 @@
-import { FetchAddWork, fetchDeleteWork } from "./store.js";
+import { addWork, deleteWork } from "./store.js";
 
 // CREATION D'UN ELEMENT HTML
 function createElement(tagName, classes = []) {
@@ -92,7 +92,7 @@ export function showWhenConnected(worksFetched, categoriesFetched) {
     })
   }
   // Barre des filtres cachée
- if ((worksFetched !== []) && (categoriesFetched !== [])) {
+  if ((worksFetched !== []) && (categoriesFetched !== [])) {
     const filters = document.getElementsByClassName("filters");
     filters[0].style.display = "none";
     // Affichage du bandeau noir
@@ -110,7 +110,7 @@ export function showWhenConnected(worksFetched, categoriesFetched) {
 }
 
 // REMPLISSAGE DE LA MODALE
-function displayThumbnailsGallery(worksSent) {
+export function displayThumbnailsGallery(worksSent) {
   // galerie de thumbnails
   for (let i in worksSent) {
     let workSenti = worksSent[i];
@@ -138,14 +138,12 @@ function displayThumbnailsGallery(worksSent) {
     trashImg.addEventListener("click", function (e) {
       e.preventDefault();
       workCard.style.display = "none";
-      fetchDeleteWork(workSenti.id);
+      deleteWork(workSenti.id, worksSent);
       // on enlève le work de la liste 
-      let WorkToDelete = worksSent.find(objet => objet.id === workSenti.id);
+      /*let WorkToDelete = worksSent.find(objet => objet.id === workSenti.id);
       let indexToDelete = worksSent.indexOf(WorkToDelete);
       worksSent.splice(indexToDelete, 1);
-      displayGallery(worksSent);
-      // mise à jour de la barre des filtres
-      updateFilterBtn(document.querySelector("#IdBtnAll"));
+      displayGallery(worksSent);*/
     })
     workCard.appendChild(trashImg);
   }
@@ -174,6 +172,7 @@ function fillModal(worksSent, categories) {
     document.querySelector("#idDeleteGallery").style.display = null;
     document.querySelector("#addTitleMsg").style.display = "none";
     document.querySelector("#addPhotoMsg").style.display = "none";
+    document.querySelector("#errorApiMsg").style.display = "none";
     document.querySelector("#modalTitle").innerText = "Galerie photos";
     document.getElementById("line1").style.display = null;
     back.addEventListener("click", returnBack);
@@ -237,10 +236,10 @@ function fillModal(worksSent, categories) {
         document.querySelector("#addPhotoMsg").style.display = "none";
         // couleur verte du bouton de validation
         const inputPhotoBtn = document.querySelector("#workAddPhotoInput");
-        if (inputPhotoBtn.files[0] !== undefined 
+        if (inputPhotoBtn.files[0] !== undefined
           && (idTitleAddPhoto.value.length !== 0 || idTitleAddPhoto.value.trim() !== '')) {
           document.querySelector("#addPhotoSubmitBtn").style.backgroundColor = "#1D6154";
-        } 
+        }
         loadPhotoBtn.removeEventListener("change", loadPhotoFile);
         loadPhotoBtn.addEventListener("change", loadPhotoFile);
       } else {
@@ -267,14 +266,14 @@ function fillModal(worksSent, categories) {
   idTitleAddPhoto.addEventListener("input", function (event) {
     event.preventDefault();
     const inputPhotoBtn = document.querySelector("#workAddPhotoInput");
-    if (inputPhotoBtn.files[0] !== undefined 
+    if (inputPhotoBtn.files[0] !== undefined
       && (idTitleAddPhoto.value.length !== 0 || idTitleAddPhoto.value.trim() !== '')) {
       document.querySelector("#addPhotoSubmitBtn").style.backgroundColor = "#1D6154";
-      } 
-    idTitleAddPhoto.removeEventListener('input', function (event){});
+    }
+    idTitleAddPhoto.removeEventListener('input', function (event) { });
   });
 
-   // validation du formulaire d'ajout de photo
+  // validation du formulaire d'ajout de photo
   const addPhotoForm = document.querySelector("#addPhotoForm");
   addPhotoForm.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -294,28 +293,28 @@ function fillModal(worksSent, categories) {
       return;
     }
 
-  // Appel à l'api
-  FetchAddWork(worksSent, categories);
-  addPhotoForm.removeEventListener('submit', function (e) { })
-  addPhotoForm.addEventListener('submit', function (e) { })
-})
+    // Appel à l'api
+    addWork(worksSent, categories);
+    addPhotoForm.removeEventListener('submit', function (e) { })
+    addPhotoForm.addEventListener('submit', function (e) { })
+  })
 
-// suppression de la galerie
-const deleteGallery = document.querySelector("#idDeleteGallery");
-deleteGallery.addEventListener("click", function (e) {
-  e.preventDefault();
-  if (confirm("Voulez-vous vraiment supprimer l'ensemble de la galerie?")) {
-    for (let j in worksSent) {
-      fetchDeleteWork(parseInt(worksSent[j].id));
+  // suppression de la galerie
+  const deleteGallery = document.querySelector("#idDeleteGallery");
+  deleteGallery.addEventListener("click", function (e) {
+    e.preventDefault();
+    if (confirm("Voulez-vous vraiment supprimer l'ensemble de la galerie?")) {
+      for (let j in worksSent) {
+        deleteWork(parseInt(worksSent[j].id), worksSent);
+      }
+      worksSent = [];
+      document.querySelector("#modalTitle").innerText = 'La galerie est vide';
+      updateWorks();
+      document.querySelector(".gallery").innerHTML = "";
+      document.querySelector("#idDeleteGallery").style.display = "none";
+      document.querySelector(".filters").style.display = "none";
     }
-    worksSent = [];
-    document.querySelector("#modalTitle").innerText = 'La galerie est vide';
-    updateWorks();
-    document.querySelector(".gallery").innerHTML = "";
-    document.querySelector("#idDeleteGallery").style.display = "none";
-    document.querySelector(".filters").style.display = "none";
-  }
-})
+  })
 }
 // mise à jour de l'ajout ou de la suppression de travaux
 export function updateWorks(worksSent) {

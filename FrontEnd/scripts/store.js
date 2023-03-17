@@ -1,8 +1,10 @@
-import { displayGallery, updateFilterBtn, updateWorks, displayFilters } from './index.js';
+import { displayGallery, updateFilterBtn, updateWorks, displayFilters, displayThumbnailsGallery } from './index.js';
+
+const API_URL = "http://localhost:5678/api/";
 
 export async function fetchWorks() {
   try {
-    const response = await fetch("http://localhost:5678/api/works");
+    const response = await fetch(`${API_URL}works`);
     if (!response.ok) {
       throw new Error(`HTTP erreur ${response.status} !`);
     }
@@ -16,7 +18,7 @@ export async function fetchWorks() {
 
 export async function fetchCategories() {
   try {
-    const response = await fetch("http://localhost:5678/api/categories");
+    const response = await fetch(`${API_URL}categories`);
     if (!response.ok) {
       throw new Error(`HTTP erreur ${response.status} !`);
     }
@@ -28,7 +30,7 @@ export async function fetchCategories() {
   }
 }
 
-export async function FetchAddWork(works, cat) {
+export async function addWork(works, cat) {
   const token = sessionStorage.getItem("access_token");
   if (sessionStorage.getItem("access_token") != null) {
     // Création de l'objet formData
@@ -41,7 +43,7 @@ export async function FetchAddWork(works, cat) {
     formData.append("category", parseInt(optId));
 
     // envoi d'une demande au serveur
-    await fetch(`http://localhost:5678/api/works`, {
+    await fetch(`${API_URL}works`, {
       method: 'POST',
       headers: {
         "Authorization": `Bearer ${token}`,
@@ -49,9 +51,6 @@ export async function FetchAddWork(works, cat) {
       body: formData
     })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Erreur lors de la requête serveur");
-        }
         return response.json();
       })
       .then(data => {
@@ -62,12 +61,6 @@ export async function FetchAddWork(works, cat) {
         works.push(data);
         // Affichage de la galerie
         displayGallery(works);
-        // mise à jour de la barre des filtres
-        if (works.length === 1) {
-          displayFilters(works, cat);
-          document.location.reload();
-        }
-        updateFilterBtn(document.querySelector("#IdBtnAll"));
         //Affichage dans la mini-galerie
         updateWorks(works);
         // retour vers modale  mini-galerie
@@ -76,32 +69,42 @@ export async function FetchAddWork(works, cat) {
       })
       .catch((error) => {
         console.error(error.message);
+        document.querySelector("#errorApiMsg").display = null;
+        document.querySelector("#errorApiMsg").innerText = "Erreur réponse serveur à l'ajout du projet";
       })
   }
 }
 
 // Suppression de travaux à partir de l'icône poubelle de la modale
-export async function fetchDeleteWork(WorkId) {
+export async function deleteWork(WorkId, works) {
   const token = sessionStorage.getItem("access_token");
-  if (sessionStorage.getItem("access_token") != null) {
-    // envoi d'une demande au serveur
-    fetch(`http://localhost:5678/api/works/${WorkId}`, {
-      method: "DELETE",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
+  if (sessionStorage.getItem("access_token") == null) { return; }
+  // envoi d'une demande au serveur
+  await fetch(`${API_URL}works/${WorkId}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        document.querySelector("#errorApiMsg").display = null;
+        document.querySelector("#errorApiMsg").innerText = "Erreur réponse serveur à l'ajout du projet";
+        document.querySelector(".idPhotosGallery").innerHTML = "";
+        displayThumbnailsGallery(works);
+        throw new Error("Erreur lors de la requête serveur");
+      }
+      // on enlève le work de la liste 
+      if (works.length !== 0) {
+        let WorkToDelete = works.find(objet => objet.id === WorkId);
+        let indexToDelete = works.indexOf(WorkToDelete);
+        works.splice(indexToDelete, 1);
+        displayGallery(works);
+      }
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Erreur lors de la requête serveur");
-        }
-        // mise à jour de la barre des filtres
-        updateFilterBtn(document.querySelector("#IdBtnAll"));
-      })
-      .catch((error) => {
-        console.error(error.message);
-      })
-  }
+    .catch((error) => {
+      console.error(error.message);
+    })
 }

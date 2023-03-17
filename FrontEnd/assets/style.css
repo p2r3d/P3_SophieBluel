@@ -485,7 +485,7 @@ footer nav ul li {
 	text-decoration: underline;
 }
 /* éventuel message erreur authentification*/
-#idErrorMsg {
+#idErrorMsg,#errorApiMsg {
 	color: #B1663C;
 	font-size: 1.6rem;
 	font-weight: 600;

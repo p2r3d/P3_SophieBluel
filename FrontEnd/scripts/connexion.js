@@ -4,6 +4,7 @@ const form = document.querySelector("form");
 form.addEventListener("submit", async function (event) {
   event.preventDefault();
 
+  // TESTS
   // test de l'email
   const msg = document.getElementById("idErrorMsg");
   msg.innerText = "";

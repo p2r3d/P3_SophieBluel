@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
@@ -10,12 +11,13 @@
 		rel="stylesheet">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="https://kit.fontawesome.com/b4aa609cc9.js" crossorigin="anonymous"></script>
-	<script type="module" src="./scripts/store.js" ></script>
-	<script type="module" src="./scripts/main.js" ></script>
-	<script type="module" src="./scripts/index.js" ></script>
+	<script type="module" src="./scripts/store.js"></script>
+	<script type="module" src="./scripts/main.js"></script>
+	<script type="module" src="./scripts/index.js"></script>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
+
 <body>
 	<header class="divHeader">
 		<div class="divheadband" style="display:none">
@@ -94,6 +96,7 @@
 				<hr id="line1">
 				<input type="button" class="btn SelectedFilter" id="idAddPhotoBtn" value="Ajouter une photo">
 				<p id="idDeleteGallery">Supprimer la galerie</p>
+				<p id="errorApiMsg"></p>
 				<!-- formulaire d'ajout de photo dans la modale-->
 				<form id="addPhotoForm" method="post" style="display:none">
 					<div id="divBlue">
@@ -131,4 +134,5 @@
 		</nav>
 	</footer>
 </body>
+
 </html>
