@@ -55,6 +55,9 @@ export async function addWork(works, cat) {
       body: formData
     })
       .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Erreur requête serveur (HTTP ${response.status}) !`);
+        }
         // récup du projet ajouté
         return response.json();
       })
@@ -73,10 +76,9 @@ export async function addWork(works, cat) {
         idBack.click();
       })
       .catch((error) => {
-        console.error(error.message);
         // affichage du message d'erreur
         document.querySelector("#errorApiMsg").style.display = null;
-        document.querySelector("#errorApiMsg").innerText = "Erreur lors de la requête serveur";
+        document.querySelector("#errorApiMsg").innerText = error.message;
       })
   }
 }
@@ -99,7 +101,7 @@ export async function deleteWork(WorkId, works) {
       if (!response.ok) {
         document.querySelector(".idPhotosGallery").innerHTML = "";
         displayThumbnailsGallery(works);
-        throw new Error("Erreur lors de la requête serveur");
+        throw new Error(`Erreur requête serveur (HTTP ${response.status}) !`);
       }
       // on enlève le work de la liste 
       if (works.length !== 0) {
@@ -113,7 +115,6 @@ export async function deleteWork(WorkId, works) {
     .catch((error) => {
       // affichage du message d'erreur
       document.querySelector("#errorApiMsg").style.display = null;
-      document.querySelector("#errorApiMsg").innerText = "Erreur lors de la requête serveur";
-      console.error(error.message);
+      document.querySelector("#errorApiMsg").innerText = error.message;
     })
 }
