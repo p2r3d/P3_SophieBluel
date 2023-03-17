@@ -212,6 +212,8 @@ function fillModal(worksSent, categories) {
     document.querySelector("#addPhotoForm").style.display = null;
     document.querySelector("#addPhotoSubmitBtn").style.backgroundColor = "#a7a7a7";
     document.querySelector("#idBack").style.display = null;
+    document.querySelector("#errorApiMsg").style.display = null;
+    document.querySelector("#errorApiMsg").innerText = "";
     document.querySelector("#divIcones").style.justifyContent = "space-between";
     document.getElementById("line1").style.display = "none";
     document.querySelector("#addTitleMsg").style.display = "none";

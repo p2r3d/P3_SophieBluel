@@ -70,7 +70,7 @@ export async function addWork(works, cat) {
       .catch((error) => {
         console.error(error.message);
         document.querySelector("#errorApiMsg").display = null;
-        document.querySelector("#errorApiMsg").innerText = "Erreur réponse serveur à l'ajout du projet";
+        document.querySelector("#errorApiMsg").innerText = "Erreur serveur lors de l'ajout";
       })
   }
 }
@@ -91,7 +91,7 @@ export async function deleteWork(WorkId, works) {
     .then((response) => {
       if (!response.ok) {
         document.querySelector("#errorApiMsg").display = null;
-        document.querySelector("#errorApiMsg").innerText = "Erreur réponse serveur à l'ajout du projet";
+        document.querySelector("#errorApiMsg").innerText = "Erreur serveur lors de la suppression";
         document.querySelector(".idPhotosGallery").innerHTML = "";
         displayThumbnailsGallery(works);
         throw new Error("Erreur lors de la requête serveur");
