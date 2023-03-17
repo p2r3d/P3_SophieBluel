@@ -1,7 +1,8 @@
-import { displayGallery, updateFilterBtn, updateWorks, displayFilters, displayThumbnailsGallery } from './index.js';
+import { displayGallery, updateWorks, displayThumbnailsGallery } from './index.js';
 
 const API_URL = "http://localhost:5678/api/";
 
+// Récupération des travaux via l'API
 export async function fetchWorks() {
   try {
     const response = await fetch(`${API_URL}works`);
@@ -16,6 +17,7 @@ export async function fetchWorks() {
   }
 }
 
+// Récupération des catégories via l'API
 export async function fetchCategories() {
   try {
     const response = await fetch(`${API_URL}categories`);
@@ -30,9 +32,11 @@ export async function fetchCategories() {
   }
 }
 
+// Ajout de travaux 
 export async function addWork(works, cat) {
   const token = sessionStorage.getItem("access_token");
   if (sessionStorage.getItem("access_token") != null) {
+    
     // Création de l'objet formData
     let formData = new FormData();
     const inputPhotoBtn = document.querySelector("#workAddPhotoInput");
@@ -51,6 +55,7 @@ export async function addWork(works, cat) {
       body: formData
     })
       .then((response) => {
+        // récup du projet ajouté
         return response.json();
       })
       .then(data => {
@@ -69,16 +74,18 @@ export async function addWork(works, cat) {
       })
       .catch((error) => {
         console.error(error.message);
-        document.querySelector("#errorApiMsg").display = null;
-        document.querySelector("#errorApiMsg").innerText = "Erreur serveur lors de l'ajout";
+        // affichage du message d'erreur
+        document.querySelector("#errorApiMsg").style.display = null;
+        document.querySelector("#errorApiMsg").innerText = "Erreur lors de la requête serveur";
       })
   }
 }
 
-// Suppression de travaux à partir de l'icône poubelle de la modale
+// Suppression de travaux 
 export async function deleteWork(WorkId, works) {
   const token = sessionStorage.getItem("access_token");
   if (sessionStorage.getItem("access_token") == null) { return; }
+  
   // envoi d'une demande au serveur
   await fetch(`${API_URL}works/${WorkId}`, {
     method: "DELETE",
@@ -90,8 +97,6 @@ export async function deleteWork(WorkId, works) {
   })
     .then((response) => {
       if (!response.ok) {
-        document.querySelector("#errorApiMsg").display = null;
-        document.querySelector("#errorApiMsg").innerText = "Erreur serveur lors de la suppression";
         document.querySelector(".idPhotosGallery").innerHTML = "";
         displayThumbnailsGallery(works);
         throw new Error("Erreur lors de la requête serveur");
@@ -101,10 +106,14 @@ export async function deleteWork(WorkId, works) {
         let WorkToDelete = works.find(objet => objet.id === WorkId);
         let indexToDelete = works.indexOf(WorkToDelete);
         works.splice(indexToDelete, 1);
+        // réaffichage de la galerie avec le tableau des travaux mis à jour
         displayGallery(works);
       }
     })
     .catch((error) => {
+      // affichage du message d'erreur
+      document.querySelector("#errorApiMsg").style.display = null;
+      document.querySelector("#errorApiMsg").innerText = "Erreur lors de la requête serveur";
       console.error(error.message);
     })
 }

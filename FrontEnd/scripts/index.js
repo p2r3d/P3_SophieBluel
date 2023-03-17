@@ -138,12 +138,8 @@ export function displayThumbnailsGallery(worksSent) {
     trashImg.addEventListener("click", function (e) {
       e.preventDefault();
       workCard.style.display = "none";
+      document.querySelector("#errorApiMsg").style.display = null;
       deleteWork(workSenti.id, worksSent);
-      // on enlève le work de la liste 
-      /*let WorkToDelete = worksSent.find(objet => objet.id === workSenti.id);
-      let indexToDelete = worksSent.indexOf(WorkToDelete);
-      worksSent.splice(indexToDelete, 1);
-      displayGallery(worksSent);*/
     })
     workCard.appendChild(trashImg);
   }
@@ -212,11 +208,10 @@ function fillModal(worksSent, categories) {
     document.querySelector("#addPhotoForm").style.display = null;
     document.querySelector("#addPhotoSubmitBtn").style.backgroundColor = "#a7a7a7";
     document.querySelector("#idBack").style.display = null;
-    document.querySelector("#errorApiMsg").style.display = null;
-    document.querySelector("#errorApiMsg").innerText = "";
     document.querySelector("#divIcones").style.justifyContent = "space-between";
     document.getElementById("line1").style.display = "none";
     document.querySelector("#addTitleMsg").style.display = "none";
+    document.querySelector("#errorApiMsg").style.display = "none";
 
     //  chargement du thumbnail
     const loadPhotoBtn = document.getElementById("workAddPhotoInput");
