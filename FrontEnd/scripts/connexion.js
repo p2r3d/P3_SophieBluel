@@ -37,20 +37,24 @@ form.addEventListener("submit", async function (event) {
   })
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Erreur lors de la requête serveur");
+        if(response.status===404) {
+          throw new Error(`Erreur requête serveur (HTTP ${response.status}) !`);
+        } else if (response.status===401) {
+          throw new Error(`Erreur dans l'identifiant ou le mot de passe`);
+        }     
       }
       return response.json();
     })
-    // le token est stocké dans le sessionStorage 
-    // puis on redirige vers la page d'accueil
+    
     .then((data) => {
+      // le token est stocké dans le sessionStorage 
       sessionStorage.setItem("access_token", data.token);
+      // redirection vers la page d'accueil
       window.location.href = '../index.html';
     })
     .catch((error) => {
       console.error(error.message);
-      msg.innerText = "Erreur lors de la requête serveur";
-
+      msg.innerText = error.message;
     })
 });
 
