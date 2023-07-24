@@ -44,8 +44,7 @@ form.addEventListener("submit", async function (event) {
         }     
       }
       return response.json();
-    })
-    
+    })  
     .then((data) => {
       // le token est stocké dans le sessionStorage 
       sessionStorage.setItem("access_token", data.token);

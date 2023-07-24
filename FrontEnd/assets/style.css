@@ -213,6 +213,7 @@ nav ul {
 	display: flex;
 	list-style-type: none;
 	flex-wrap:wrap;
+	align-items:center;
 	gap :2rem;
 }
 nav li {
